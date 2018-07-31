@@ -85,8 +85,7 @@ void PageConnection::bleScanDone(QVariantMap devs, bool done)
 
     ui->bleDevBox->clear();
     for (auto d: devs.keys()) {
-        QString devName = devs.value(d).toString();
-        QString addr = d;
+        QString addr = devs.value(d).toString();
         QString setName = mVesc->getBleName(addr);
 
         if (!setName.isEmpty()) {
@@ -96,16 +95,16 @@ void PageConnection::bleScanDone(QVariantMap devs, bool done)
             name += addr;
             name += "]";
             ui->bleDevBox->insertItem(0, name, addr);
-        } else if (devName.contains("VESC")) {
+        } else if (d.contains("VESC")) {
             QString name;
-            name += devName;
+            name += d;
             name += " [";
             name += addr;
             name += "]";
             ui->bleDevBox->insertItem(0, name, addr);
         } else {
             QString name;
-            name += devName;
+            name += d;
             name += " [";
             name += addr;
             name += "]";
