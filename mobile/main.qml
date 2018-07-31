@@ -1,5 +1,5 @@
 /*
-    Copyright 2017 - 2018 Benjamin Vedder	benjamin@vedder.se
+    Copyright 2017 Benjamin Vedder	benjamin@vedder.se
 
     This file is part of VESC Tool.
 
@@ -40,12 +40,7 @@ ApplicationWindow {
 
     Component.onCompleted: {
         Utility.checkVersion(VescIf)
-    }
-
-    Controls {
-        id: controls
-        parentWidth: appWindow.width
-        parentHeight: appWindow.height - footer.height - tabBar.height
+//        swipeView.currentIndex = 3
     }
 
     Drawer {
@@ -89,16 +84,6 @@ ApplicationWindow {
 
                 onClicked: {
                     VescIf.disconnectPort()
-                }
-            }
-
-            Button {
-                Layout.fillWidth: true
-                text: "Controls..."
-                flat: true
-
-                onClicked: {
-                    controls.openDialog()
                 }
             }
 
@@ -198,15 +183,6 @@ ApplicationWindow {
                 anchors.fill: parent
             }
         }
-
-        Page {
-            Terminal {
-                anchors.fill: parent
-                anchors.leftMargin: 10
-                anchors.rightMargin: 10
-                anchors.topMargin: 10
-            }
-        }
     }
 
     header: Rectangle {
@@ -251,7 +227,7 @@ ApplicationWindow {
                     color: "#e8e8e8"
                 }
 
-                property int buttons: 7
+                property int buttons: 6
                 property int buttonWidth: 120
 
                 TabButton {
@@ -276,10 +252,6 @@ ApplicationWindow {
                 }
                 TabButton {
                     text: qsTr("Firmware")
-                    width: Math.max(tabBar.buttonWidth, tabBar.width / tabBar.buttons)
-                }
-                TabButton {
-                    text: qsTr("Terminal")
                     width: Math.max(tabBar.buttonWidth, tabBar.width / tabBar.buttons)
                 }
             }

@@ -48,7 +48,6 @@ void PageControllers::setVesc(VescInterface *vesc)
         ui->paramTab->addParamRow(mVesc->mcConfig(), "s_pid_kp");
         ui->paramTab->addParamRow(mVesc->mcConfig(), "s_pid_ki");
         ui->paramTab->addParamRow(mVesc->mcConfig(), "s_pid_kd");
-        ui->paramTab->addParamRow(mVesc->mcConfig(), "s_pid_kd_filter");
         ui->paramTab->addParamRow(mVesc->mcConfig(), "s_pid_min_erpm");
         ui->paramTab->addParamRow(mVesc->mcConfig(), "s_pid_allow_braking");
 
@@ -56,7 +55,6 @@ void PageControllers::setVesc(VescInterface *vesc)
         ui->paramTab->addParamRow(mVesc->mcConfig(), "p_pid_kp");
         ui->paramTab->addParamRow(mVesc->mcConfig(), "p_pid_ki");
         ui->paramTab->addParamRow(mVesc->mcConfig(), "p_pid_kd");
-        ui->paramTab->addParamRow(mVesc->mcConfig(), "p_pid_kd_filter");
         ui->paramTab->addParamRow(mVesc->mcConfig(), "p_pid_ang_div");
     }
 }

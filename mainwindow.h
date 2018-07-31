@@ -120,8 +120,6 @@ private slots:
     void on_actionFirmwareChangelog_triggered();
     void on_actionVESCProjectForums_triggered();
     void on_actionLicense_triggered();
-    void on_posBox_editingFinished();
-    void on_posBox_valueChanged(double arg1);
 
 private:
     Ui::MainWindow *ui;

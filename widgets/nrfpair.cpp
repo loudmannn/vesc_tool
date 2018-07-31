@@ -54,8 +54,8 @@ void NrfPair::setVesc(VescInterface *vesc)
     mVesc = vesc;
 
     if (mVesc) {
-        connect(mVesc->commands(), SIGNAL(nrfPairingRes(int)),
-                this, SLOT(nrfPairingRes(int)));
+        connect(mVesc->commands(), SIGNAL(nrfPairingRes(NRF_PAIR_RES)),
+                this, SLOT(nrfPairingRes(NRF_PAIR_RES)));
     }
 }
 
@@ -67,7 +67,7 @@ void NrfPair::startPairing()
     }
 }
 
-void NrfPair::nrfPairingRes(int res)
+void NrfPair::nrfPairingRes(NRF_PAIR_RES res)
 {
     if (!mRunning) {
         return;

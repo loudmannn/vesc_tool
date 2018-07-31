@@ -41,7 +41,7 @@ public:
     void startPairing();
 
 private slots:
-    void nrfPairingRes(int res);
+    void nrfPairingRes(NRF_PAIR_RES res);
     void timerSlot();
 
     void on_startButton_clicked();
