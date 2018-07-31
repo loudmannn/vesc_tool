@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 # Version
-VT_VERSION = 0.95
+VT_VERSION = 0.94
 VT_INTRO_VERSION = 1
 
 DEFINES += VT_VERSION=$$VT_VERSION
@@ -13,9 +13,6 @@ DEFINES += VT_INTRO_VERSION=$$VT_INTRO_VERSION
 
 # Serial port available
 DEFINES += HAS_SERIALPORT
-
-# Bluetooth available
-DEFINES += HAS_BLUETOOTH
 
 # Options
 #CONFIG += build_original
@@ -34,15 +31,12 @@ QT       += core gui
 QT       += widgets
 QT       += printsupport
 QT       += network
+QT       += bluetooth
 QT       += quick
 QT       += quickcontrols2
 
 contains(DEFINES, HAS_SERIALPORT) {
     QT       += serialport
-}
-
-contains(DEFINES, HAS_BLUETOOTH) {
-    QT       += bluetooth
 }
 
 android: QT += androidextras
@@ -96,6 +90,7 @@ SOURCES += main.cpp\
     setupwizardapp.cpp \
     setupwizardmotor.cpp \
     startupwizard.cpp \
+    bleuart.cpp \
     utility.cpp
 
 HEADERS  += mainwindow.h \
@@ -111,15 +106,11 @@ HEADERS  += mainwindow.h \
     setupwizardapp.h \
     setupwizardmotor.h \
     startupwizard.h \
+    bleuart.h \
     utility.h
 
 FORMS    += mainwindow.ui \
     parametereditor.ui
-
-contains(DEFINES, HAS_BLUETOOTH) {
-    SOURCES += bleuart.cpp
-    HEADERS += bleuart.h
-}
 
 include(pages/pages.pri)
 include(widgets/widgets.pri)

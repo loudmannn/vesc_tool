@@ -52,10 +52,8 @@ void PageConnection::setVesc(VescInterface *vesc)
 {
     mVesc = vesc;
 
-#ifdef HAS_BLUETOOTH
     connect(mVesc->bleDevice(), SIGNAL(scanDone(QVariantMap,bool)),
             this, SLOT(bleScanDone(QVariantMap,bool)));
-#endif
 
     on_serialRefreshButton_clicked();
 }
@@ -81,7 +79,6 @@ void PageConnection::timerSlot()
 
 void PageConnection::bleScanDone(QVariantMap devs, bool done)
 {
-#ifdef HAS_BLUETOOTH
     if (done) {
         ui->bleScanButton->setEnabled(true);
     }
@@ -116,10 +113,6 @@ void PageConnection::bleScanDone(QVariantMap devs, bool done)
         }
     }
     ui->bleDevBox->setCurrentIndex(0);
-#else
-    (void)devs;
-    (void)done;
-#endif
 }
 
 void PageConnection::on_serialRefreshButton_clicked()
@@ -191,12 +184,10 @@ void PageConnection::on_autoConnectButton_clicked()
 
 void PageConnection::on_bleScanButton_clicked()
 {
-#ifdef HAS_BLUETOOTH
     if (mVesc) {
         mVesc->bleDevice()->startScan();
         ui->bleScanButton->setEnabled(false);
     }
-#endif
 }
 
 void PageConnection::on_bleDisconnectButton_clicked()
@@ -217,7 +208,6 @@ void PageConnection::on_bleConnectButton_clicked()
 
 void PageConnection::on_bleSetNameButton_clicked()
 {
-#ifdef HAS_BLUETOOTH
     if (mVesc) {
         QString name = ui->bleNameEdit->text();
         QString addr = ui->bleDevBox->currentData().toString();
@@ -232,5 +222,4 @@ void PageConnection::on_bleSetNameButton_clicked()
             ui->bleDevBox->setCurrentIndex(0);
         }
     }
-#endif
 }
