@@ -85,30 +85,20 @@ void PageConnection::bleScanDone(QVariantMap devs, bool done)
 
     ui->bleDevBox->clear();
     for (auto d: devs.keys()) {
-        QString addr = devs.value(d).toString();
-        QString setName = mVesc->getBleName(addr);
-
-        if (!setName.isEmpty()) {
-            QString name;
-            name += setName;
-            name += " [";
-            name += addr;
-            name += "]";
-            ui->bleDevBox->insertItem(0, name, addr);
-        } else if (d.contains("VESC")) {
+        if (d.contains("VESC")) {
             QString name;
             name += d;
             name += " [";
-            name += addr;
+            name += devs.value(d).toString();
             name += "]";
-            ui->bleDevBox->insertItem(0, name, addr);
+            ui->bleDevBox->insertItem(0, name, devs.value(d).toString());
         } else {
             QString name;
             name += d;
             name += " [";
-            name += addr;
+            name += devs.value(d).toString();
             name += "]";
-            ui->bleDevBox->addItem(name, addr);
+            ui->bleDevBox->addItem(name, devs.value(d).toString());
         }
     }
     ui->bleDevBox->setCurrentIndex(0);
@@ -201,24 +191,6 @@ void PageConnection::on_bleConnectButton_clicked()
     if (mVesc) {
         if (ui->bleDevBox->count() > 0) {
             mVesc->connectBle(ui->bleDevBox->currentData().toString());
-        }
-    }
-}
-
-void PageConnection::on_bleSetNameButton_clicked()
-{
-    if (mVesc) {
-        QString name = ui->bleNameEdit->text();
-        QString addr = ui->bleDevBox->currentData().toString();
-
-        if (!name.isEmpty()) {
-            mVesc->storeBleName(addr, name);
-            name += " [";
-            name += addr;
-            name += "]";
-            ui->bleDevBox->removeItem(0);
-            ui->bleDevBox->insertItem(0, name, addr);
-            ui->bleDevBox->setCurrentIndex(0);
         }
     }
 }
