@@ -12,8 +12,11 @@ SET zipFile=%~dp0tools\Qt-Static.zip
 set /A maxbytesize=1606852212
 ::set /A maxbytesize=1606762350
 set /A minbytesize=0
-
-call :setsize %zipFile%
+IF EXIST %zipFile% (
+	call :setsize %zipFile%
+) ELSE (
+	set /A size=0
+)
 
 ::echo %size%
 

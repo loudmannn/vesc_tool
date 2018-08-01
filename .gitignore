@@ -45,3 +45,7 @@ CMakeLists.txt.user*
 # Other
 android-libvesc_tool.so-deployment-settings.json
 
+#Qt tools
+/tools/Qt
+/tools/Qt-Static.zip
+
