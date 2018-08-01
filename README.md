@@ -1,3 +1,9 @@
-This is a GUI written using the Qt toolkit to configure the VESC motor controller. Read more and download precompiled versions at
+Это форк VESC Tool v0.89
 
-http://vesc-project.com/
+ПОДГОТОВКА.
+Перед сборкой необходимо скачать и подготовить Qt5.
+Это прозводится запуском файла "win_qt_prepare.bat"
+Скрипт скачивает Qt версии 5.11.1 для статической сборки проекта и производит настройку окружения
+
+СБОРКА.
+Для сборки приложения запустить "win_build_static.bat"

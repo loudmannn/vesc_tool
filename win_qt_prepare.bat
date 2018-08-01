@@ -1,0 +1,66 @@
+@echo off
+chcp 866 >nul
+set PATH=%cd%\tools\wget\bin;%cd%\tools\7-Zip;%PATH%
+
+echo Данный скрипт скачивает и настраивает Qt5 для сборки проекта...
+
+echo Скачивание Qt5...
+
+SET downloadUrl=https://bitbucket.org/loudmannn/qt5-static-win/raw/5ce2a357b533d1e41b6f4faccb2634024aeed832/Qt.zip
+SET zipFile=%~dp0tools\Qt-Static.zip
+
+set /A maxbytesize=1606852212
+::set /A maxbytesize=1606762350
+set /A minbytesize=0
+
+call :setsize %zipFile%
+
+::echo %size%
+
+IF %size% EQU %minbytesize% (
+	wget --no-check-certificate -O %zipFile% %downloadUrl% 
+) ELSE (
+	IF %size% LSS %maxbytesize% (
+		wget --no-check-certificate --continue -O %zipFile% %downloadUrl% 
+	) ELSE (
+		echo Архив с Qt уже скачан...
+	)
+)
+
+IF %size% EQU %maxbytesize% (
+	IF EXIST "%~dp0tools\Qt\Qt5.11.1\5.11.1\bin" (
+		echo Архив уже распакован...
+	) ELSE (
+		echo Распаковка Qt5...
+		7z x %zipFile% -o%~dp0tools
+		IF EXIST "%~dp0tools\Qt\Qt5.11.1\5.11.1\bin" (
+			echo Распаковка Завершена...
+		) ELSE (
+			echo Не удалось распаковать архив, удалите %zipFile% и запустите этот скрипт заново...
+		)
+	)
+) ELSE (
+	echo %zipFile% поврежден, удалите его и запустите этот скрипт заново
+)
+
+
+echo Настройка окружения...
+::echo %~dp0
+set CURDIR=%~dp0
+set "CURDIR=%CURDIR:\=/%"
+set QT_PATH=%~dp0tools/Qt/Qt5.11.1/5.11.1
+set QT_PATH_PRINT=%CURDIR%tools/Qt/Qt5.11.1/5.11.1
+::echo %QT_PATH%
+::copy NUL %QT_PATH%\bin\qt.conf
+::CHCP 866& FindStr /? >%QT_PATH%\bin\qt.conf
+echo [Paths]> %QT_PATH%\bin\qt.conf
+echo Prefix = %QT_PATH_PRINT%>> %QT_PATH%/bin/qt.conf
+
+echo Qt5 Static успешно скачан и настроен...
+
+echo Нажмите любую клавишу для выхода
+pause >NUL
+exit /B
+
+:setsize
+set size=%~z1
