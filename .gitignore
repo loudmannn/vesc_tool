@@ -49,3 +49,5 @@ android-libvesc_tool.so-deployment-settings.json
 /tools/Qt
 /tools/Qt-Static.zip
 
+/QtCreator.lnk
+
