@@ -1,6 +1,6 @@
 @echo off
 chcp 866 >nul
-set PATH=%cd%\tools\wget\bin;%cd%\tools\7-Zip;%PATH%
+set PATH=%cd%\tools\Qt\Qt5.11.1\5.11.1\bin;%cd%\tools\wget\bin;%cd%\tools\7-Zip;%PATH%
 
 echo Данный скрипт скачивает и настраивает Qt5 для сборки проекта...
 
@@ -58,6 +58,10 @@ set QT_PATH_PRINT=%CURDIR%tools/Qt/Qt5.11.1/5.11.1
 ::CHCP 866& FindStr /? >%QT_PATH%\bin\qt.conf
 echo [Paths]> %QT_PATH%\bin\qt.conf
 echo Prefix = %QT_PATH_PRINT%>> %QT_PATH%/bin/qt.conf
+
+
+echo Первичная конфигурация проекта...
+qmake -config release "CONFIG+=release_win build_free"
 
 echo Qt5 Static успешно скачан и настроен...
 
