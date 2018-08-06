@@ -51,3 +51,6 @@ android-libvesc_tool.so-deployment-settings.json
 
 /QtCreator.lnk
 
+#7Zipaloow dll
+!/tools/7-Zip/7z.dll
+
