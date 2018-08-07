@@ -54,3 +54,5 @@ android-libvesc_tool.so-deployment-settings.json
 #7Zipaloow dll
 !/tools/7-Zip/7z.dll
 
+#build path
+/build/*
