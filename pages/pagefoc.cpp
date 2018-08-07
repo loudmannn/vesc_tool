@@ -45,7 +45,7 @@ void PageFoc::setVesc(VescInterface *vesc)
 
     if (mVesc) {
         ui->detectFoc->setVesc(mVesc);
-        ui->detectFocHall->setVesc(mVesc);
+//        ui->detectFocHall->setVesc(mVesc);
         ui->detectFocEncoder->setVesc(mVesc);
 
         ui->generalTab->addParamRow(mVesc->mcConfig(), "foc_sensor_mode");
@@ -56,22 +56,22 @@ void PageFoc::setVesc(VescInterface *vesc)
         ui->generalTab->addParamRow(mVesc->mcConfig(), "foc_current_ki");
         ui->generalTab->addParamRow(mVesc->mcConfig(), "foc_observer_gain");
 
-        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_openloop_rpm");
-        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_sl_openloop_hyst");
-        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_sl_openloop_time");
-        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_sat_comp");
-        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_temp_comp");
-        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_temp_comp_base_temp");
+//        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_openloop_rpm");
+//        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_sl_openloop_hyst");
+//        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_sl_openloop_time");
+//        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_sat_comp");
+//        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_temp_comp");
+//        ui->sensorlessTab->addParamRow(mVesc->mcConfig(), "foc_temp_comp_base_temp");
 
-        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_sl_erpm");
-        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_0");
-        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_1");
-        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_2");
-        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_3");
-        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_4");
-        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_5");
-        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_6");
-        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_7");
+//        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_sl_erpm");
+//        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_0");
+//        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_1");
+//        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_2");
+//        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_3");
+//        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_4");
+//        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_5");
+//        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_6");
+//        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_7");
 
         ui->encoderTab->addParamRow(mVesc->mcConfig(), "foc_sl_erpm");
         ui->encoderTab->addParamRow(mVesc->mcConfig(), "foc_encoder_offset");

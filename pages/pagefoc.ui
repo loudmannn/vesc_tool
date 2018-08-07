@@ -35,29 +35,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="title">
-       <string>Sensorless</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="ParamTable" name="sensorlessTab"/>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tab_3">
-      <attribute name="title">
-       <string>Hall Sensors</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <widget class="ParamTable" name="hallTab"/>
-       </item>
-       <item>
-        <widget class="DetectFocHall" name="detectFocHall" native="true"/>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
        <string>Encoder</string>
@@ -95,12 +72,6 @@
    <class>DetectFoc</class>
    <extends>QWidget</extends>
    <header>widgets/detectfoc.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>DetectFocHall</class>
-   <extends>QWidget</extends>
-   <header>widgets/detectfochall.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

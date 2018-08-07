@@ -677,8 +677,8 @@ FocHallPage::FocHallPage(VescInterface *vesc, QWidget *parent)
     setSubTitle(tr("Detect and set the required settings for running FOC with hall sensors."));
 
     mParamTab = new ParamTable;
-    mDetect = new DetectFocHall(this);
-    mDetect->setVesc(vesc);
+//    mDetect = new DetectFocHall(this);
+//    mDetect->setVesc(vesc);
 
     mParamTab->addParamRow(mVesc->mcConfig(), "foc_sl_erpm");
     mParamTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_0");
@@ -692,7 +692,7 @@ FocHallPage::FocHallPage(VescInterface *vesc, QWidget *parent)
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(mParamTab);
-    layout->addWidget(mDetect);
+//    layout->addWidget(mDetect);
     setLayout(layout);
 }
 

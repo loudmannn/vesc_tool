@@ -54,14 +54,13 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
     QByteArray localMsg = msg.toLocal8Bit();
     QString str;
     QString typeStr;
-    bool isBad = false;
 
     switch (type) {
     case QtDebugMsg: typeStr = "DEBUG"; break;
         //    case QtInfoMsg: typeStr = "INFO"; break;
-    case QtWarningMsg: typeStr = "WARNING"; isBad = true; break;
-    case QtCriticalMsg: typeStr = "CRITICAL"; isBad = true; break;
-    case QtFatalMsg: typeStr = "FATAL"; isBad = true; break;
+    case QtWarningMsg: typeStr = "WARNING"; break;
+    case QtCriticalMsg: typeStr = "CRITICAL"; break;
+    case QtFatalMsg: typeStr = "FATAL"; break;
 
     default:
         break;
@@ -69,18 +68,6 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 
     str.sprintf("%s (%s:%u %s): %s", typeStr.toLocal8Bit().data(),
                 context.file, context.line, context.function, localMsg.constData());
-
-    if (PageDebugPrint::currentMsgHandler) {
-        QString strTmp;
-        if (isBad) {
-            strTmp = "<font color=\"red\">" + str + "</font><br>";
-        } else {
-            strTmp = str + "<br>";
-        }
-
-        QMetaObject::invokeMethod(PageDebugPrint::currentMsgHandler, "printConsole",
-                                  Qt::QueuedConnection, Q_ARG(QString, strTmp));
-    }
 
     printf("%s\n", str.toLocal8Bit().data());
     fflush(stdout);
@@ -159,8 +146,6 @@ MainWindow::MainWindow(QWidget *parent) :
             showMaximized();
         }
     }
-
-    mPageDebugPrint->printConsole("VESC® Tool " + mVersion + " started<br>");
 }
 
 MainWindow::~MainWindow()
@@ -277,7 +262,6 @@ void MainWindow::timerSlot()
             mStatusLabel->setText(mVesc->getConnectedPortName());
             static QString statusLast = "";
             if (str != statusLast) {
-                mPageDebugPrint->printConsole("Status: " + str + "<br>");
                 statusLast = str;
             }
         }
@@ -414,10 +398,8 @@ void MainWindow::showStatusInfo(QString info, bool isGood)
 {
     if (isGood) {
         mStatusLabel->setStyleSheet("QLabel { background-color : lightgreen; color : black; }");
-        mPageDebugPrint->printConsole("Status: " + info + "<br>");
     } else {
         mStatusLabel->setStyleSheet("QLabel { background-color : red; color : black; }");
-        mPageDebugPrint->printConsole("<font color=\"red\">Status: " + info + "</font><br>");
     }
 
     mStatusInfoTime = 80;
@@ -863,12 +845,6 @@ void MainWindow::reloadPages()
     addPageItem(tr("BLDC"), "://res/icons/bldc.png",
                 "://res/icons/mcconf.png", false, true);
 
-    mPageDc = new PageDc(this);
-    mPageDc->setVesc(mVesc);
-    ui->pageWidget->addWidget(mPageDc);
-    addPageItem(tr("DC"), "://res/icons/Car Battery-96.png",
-                "://res/icons/mcconf.png", false, true);
-
     mPageFoc = new PageFoc(this);
     mPageFoc->setVesc(mVesc);
     ui->pageWidget->addWidget(mPageFoc);
@@ -881,12 +857,6 @@ void MainWindow::reloadPages()
     addPageItem(tr("PID Controllers"), "://res/icons/Speed-96.png",
                 "://res/icons/mcconf.png", false, true);
 
-    mPageMotorInfo = new PageMotorInfo(this);
-    mPageMotorInfo->setVesc(mVesc);
-    ui->pageWidget->addWidget(mPageMotorInfo);
-    addPageItem(tr("Additional Info"), "://res/icons/About-96.png",
-                "://res/icons/mcconf.png", false, true);
-
     mPageAppSettings = new PageAppSettings(this);
     mPageAppSettings->setVesc(mVesc);
     ui->pageWidget->addWidget(mPageAppSettings);
@@ -896,36 +866,6 @@ void MainWindow::reloadPages()
     mPageAppGeneral->setVesc(mVesc);
     ui->pageWidget->addWidget(mPageAppGeneral);
     addPageItem(tr("General"), "://res/icons/Horizontal Settings Mixer-96.png",
-                "://res/icons/appconf.png", false, true);
-
-    mPageAppPpm = new PageAppPpm(this);
-    mPageAppPpm->setVesc(mVesc);
-    ui->pageWidget->addWidget(mPageAppPpm);
-    addPageItem(tr("PPM"), "://res/icons/Controller-96.png",
-                "://res/icons/appconf.png", false, true);
-
-    mPageAppAdc = new PageAppAdc(this);
-    mPageAppAdc->setVesc(mVesc);
-    ui->pageWidget->addWidget(mPageAppAdc);
-    addPageItem(tr("ADC"), "://res/icons/Potentiometer-96.png",
-                "://res/icons/appconf.png", false, true);
-
-    mPageAppUart = new PageAppUart(this);
-    mPageAppUart->setVesc(mVesc);
-    ui->pageWidget->addWidget(mPageAppUart);
-    addPageItem(tr("UART"), "://res/icons/Rs 232 Male-96.png",
-                "://res/icons/appconf.png", false, true);
-
-    mPageAppNunchuk = new PageAppNunchuk(this);
-    mPageAppNunchuk->setVesc(mVesc);
-    ui->pageWidget->addWidget(mPageAppNunchuk);
-    addPageItem(tr("Nunchuk"), "://res/icons/Wii-96.png",
-                "://res/icons/appconf.png", false, true);
-
-    mPageAppNrf = new PageAppNrf(this);
-    mPageAppNrf->setVesc(mVesc);
-    ui->pageWidget->addWidget(mPageAppNrf);
-    addPageItem(tr("Nrf"), "://res/icons/Online-96.png",
                 "://res/icons/appconf.png", false, true);
 
     mPageDataAnalysis = new PageDataAnalysis(this);
@@ -947,14 +887,6 @@ void MainWindow::reloadPages()
     mPageTerminal->setVesc(mVesc);
     ui->pageWidget->addWidget(mPageTerminal);
     addPageItem(tr("VESC Terminal"), "://res/icons/Console-96.png", "", true);
-
-    mPageDebugPrint = new PageDebugPrint(this);
-    ui->pageWidget->addWidget(mPageDebugPrint);
-    addPageItem(tr("Debug Console"), "://res/icons/Bug-96.png", "", true);
-
-    mPageSettings = new PageSettings(this);
-    ui->pageWidget->addWidget(mPageSettings);
-    addPageItem(tr("VESC Tool Settings"), "://res/icons/Settings-96.png", "", true);
 
     // Adjust sizes
     QFontMetrics fm(this->font());
@@ -1131,26 +1063,6 @@ void MainWindow::on_actionParameterEditorInfo_triggered()
     p->setAttribute(Qt::WA_DeleteOnClose);
     p->setParams(mVesc->infoConfig());
     p->show();
-}
-
-void MainWindow::on_actionSaveMotorConfigurationHeader_triggered()
-{
-    saveParamFileDialog("mcconf", false);
-}
-
-void MainWindow::on_actionSaveAppConfigurationHeader_triggered()
-{
-    saveParamFileDialog("appconf", false);
-}
-
-void MainWindow::on_actionSaveMotorConfigurationHeaderWrap_triggered()
-{
-    saveParamFileDialog("mcconf", true);
-}
-
-void MainWindow::on_actionSaveAppConfigurationHeaderWrap_triggered()
-{
-    saveParamFileDialog("appconf", true);
 }
 
 void MainWindow::on_actionTerminalPrintFaults_triggered()

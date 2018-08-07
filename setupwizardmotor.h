@@ -30,7 +30,6 @@
 #include "widgets/detectbldc.h"
 #include "widgets/detectfoc.h"
 #include "widgets/detectfocencoder.h"
-#include "widgets/detectfochall.h"
 #include "pages/pageconnection.h"
 #include "pages/pagefirmware.h"
 #include "widgets/aspectimglabel.h"
@@ -254,7 +253,6 @@ public:
 private:
     VescInterface *mVesc;
     ParamTable *mParamTab;
-    DetectFocHall *mDetect;
 
 };
 

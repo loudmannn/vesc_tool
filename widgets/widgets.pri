@@ -9,7 +9,6 @@ FORMS += \
     $$PWD/batterycalculator.ui \
     $$PWD/detectfoc.ui \
     $$PWD/detectfocencoder.ui \
-    $$PWD/detectfochall.ui \
     $$PWD/ppmmap.ui \
     $$PWD/adcmap.ui \
     $$PWD/nrfpair.ui \
@@ -33,7 +32,6 @@ HEADERS += \
     $$PWD/batterycalculator.h \
     $$PWD/detectfoc.h \
     $$PWD/detectfocencoder.h \
-    $$PWD/detectfochall.h \
     $$PWD/ppmmap.h \
     $$PWD/adcmap.h \
     $$PWD/rtdatatext.h \
@@ -62,7 +60,6 @@ SOURCES += \
     $$PWD/batterycalculator.cpp \
     $$PWD/detectfoc.cpp \
     $$PWD/detectfocencoder.cpp \
-    $$PWD/detectfochall.cpp \
     $$PWD/ppmmap.cpp \
     $$PWD/adcmap.cpp \
     $$PWD/rtdatatext.cpp \

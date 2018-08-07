@@ -20,7 +20,7 @@ DEFINES += HAS_SERIALPORT
 #CONFIG += build_gold
 #CONFIG += build_silver
 #CONFIG += build_bronze
-#CONFIG += build_free
+CONFIG += build_free
 
 # Build mobile GUI
 #CONFIG += build_mobile

@@ -14,7 +14,7 @@
    <string>VESC Tool</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="res_original.qrc">
+   <iconset resource="res_gold.qrc">
     <normaloff>:/res/icon.png</normaloff>:/res/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -44,7 +44,7 @@
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap resource="res_original.qrc">:/res/logo.png</pixmap>
+           <pixmap resource="res_gold.qrc">:/res/logo.png</pixmap>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -468,7 +468,7 @@
      <x>0</x>
      <y>0</y>
      <width>1054</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -480,12 +480,6 @@
     <addaction name="separator"/>
     <addaction name="actionSaveAppconfXml"/>
     <addaction name="actionLoadAppconfXml"/>
-    <addaction name="separator"/>
-    <addaction name="actionSaveMotorConfigurationHeader"/>
-    <addaction name="actionSaveMotorConfigurationHeaderWrap"/>
-    <addaction name="separator"/>
-    <addaction name="actionSaveAppConfigurationHeader"/>
-    <addaction name="actionSaveAppConfigurationHeaderWrap"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -1050,7 +1044,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="res_original.qrc"/>
+  <include location="res_gold.qrc"/>
   <include location="res.qrc"/>
  </resources>
  <connections/>

@@ -35,22 +35,13 @@
 #include "pages/pagesampleddata.h"
 #include "pages/pageterminal.h"
 #include "pages/pagefirmware.h"
-#include "pages/pagedebugprint.h"
 #include "pages/pagemotorsettings.h"
 #include "pages/pagemotor.h"
 #include "pages/pagebldc.h"
-#include "pages/pagedc.h"
 #include "pages/pagefoc.h"
 #include "pages/pagecontrollers.h"
-#include "pages/pagemotorinfo.h"
 #include "pages/pageappsettings.h"
 #include "pages/pageappgeneral.h"
-#include "pages/pageappppm.h"
-#include "pages/pageappadc.h"
-#include "pages/pageappuart.h"
-#include "pages/pageappnunchuk.h"
-#include "pages/pageappnrf.h"
-#include "pages/pagesettings.h"
 
 namespace Ui {
 class MainWindow;
@@ -104,10 +95,6 @@ private slots:
     void on_actionParameterEditorMcconf_triggered();
     void on_actionParameterEditorAppconf_triggered();
     void on_actionParameterEditorInfo_triggered();
-    void on_actionSaveMotorConfigurationHeader_triggered();
-    void on_actionSaveAppConfigurationHeader_triggered();
-    void on_actionSaveMotorConfigurationHeaderWrap_triggered();
-    void on_actionSaveAppConfigurationHeaderWrap_triggered();
     void on_actionTerminalPrintFaults_triggered();
     void on_actionTerminalShowHelp_triggered();
     void on_actionTerminalClear_triggered();
@@ -142,22 +129,13 @@ private:
     PageSampledData *mPageSampledData;
     PageTerminal *mPageTerminal;
     PageFirmware *mPageFirmware;
-    PageDebugPrint *mPageDebugPrint;
     PageMotorSettings *mPageMotorSettings;
     PageMotor *mPageMotor;
     PageBldc *mPageBldc;
-    PageDc *mPageDc;
     PageFoc *mPageFoc;
     PageControllers *mPageControllers;
-    PageMotorInfo *mPageMotorInfo;
     PageAppSettings *mPageAppSettings;
     PageAppGeneral *mPageAppGeneral;
-    PageAppPpm *mPageAppPpm;
-    PageAppAdc *mPageAppAdc;
-    PageAppUart *mPageAppUart;
-    PageAppNunchuk *mPageAppNunchuk;
-    PageAppNrf *mPageAppNrf;
-    PageSettings *mPageSettings;
 
     void addPageItem(QString name,
                      QString icon = "",
