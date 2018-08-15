@@ -1,6 +1,6 @@
 @echo off
 chcp 866 >nul
-set PATH=%cd%\tools\Qt\Qt5.11.1\5.11.1\bin;%cd%\tools\wget\bin;%cd%\tools\7-Zip;%PATH%
+set PATH=%cd%\tools\Qt\Qt5.11.1\5.11.1\bin;%cd%\tools\Qt\Qt5.11.1\Tools\mingw530_32\bin;%cd%\tools\wget\bin;%cd%\tools\7-Zip;%PATH%
 
 echo Данный скрипт скачивает и настраивает Qt5 для сборки проекта...
 
