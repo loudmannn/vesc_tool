@@ -19,6 +19,7 @@
 
 #include "pagertdata.h"
 #include "ui_pagertdata.h"
+#include "xlsxdocument.h"
 
 PageRtData::PageRtData(QWidget *parent) :
     QWidget(parent),
@@ -29,13 +30,16 @@ PageRtData::PageRtData(QWidget *parent) :
     mVesc = 0;
 
     mTimer = new QTimer(this);
-    mTimer->start(20);
+    //mTimer->start(20);
+    mTimer->start(10); //100hz
 
     mSecondCounter = 0.0;
     mLastUpdateTime = 0;
 
     mUpdateValPlot = false;
     mUpdatePosPlot = false;
+
+    ui->stopWriteXlsButton->setEnabled(false);
 
     ui->currentPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
     ui->tempPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
@@ -143,6 +147,9 @@ PageRtData::PageRtData(QWidget *parent) :
     ui->posPlot->xAxis->setLabel("Sample");
     ui->posPlot->yAxis->setLabel("Degrees");
 
+    xlsWriteStarted = false;
+
+
     connect(mTimer, SIGNAL(timeout()),
             this, SLOT(timerSlot()));
 }
@@ -236,7 +243,7 @@ void PageRtData::timerSlot()
 void PageRtData::valuesReceived(MC_VALUES values)
 {
     ui->rtText->setValues(values);
-
+    valuesWriteXls(values);
     const int maxS = 500;
 
     appendDoubleAndTrunc(&mTempMosVec, values.temp_mos, maxS);
@@ -262,6 +269,50 @@ void PageRtData::valuesReceived(MC_VALUES values)
     mLastUpdateTime = tNow;
 
     mUpdateValPlot = true;
+}
+
+void PageRtData::valuesWriteXls(MC_VALUES values)
+{
+    bool putTimeFromStart = true;
+
+    lastColumn++;
+
+    QString currTimeString = "";
+    if(putTimeFromStart)
+    {
+        qint64 tNow = QDateTime::currentMSecsSinceEpoch();
+
+        if(xlsWriteStartTime == 0)
+            xlsWriteStartTime = tNow;
+
+        //get current time from start
+        qint64 elapsed = tNow - xlsWriteStartTime;
+        int elapsedH = elapsed/3600000;
+        int elapsedM = elapsed/60000;
+        int elapsedS = elapsed/1000;
+        int elapsedMs = elapsed%1000;
+
+        // start time formating
+        if(elapsedH < 10) currTimeString += "0";
+        currTimeString += QVariant(elapsedH).toString() + ":";
+        if(elapsedM < 10) currTimeString += "0";
+        currTimeString += QVariant(elapsedM).toString() + ":";
+        if(elapsedS < 10) currTimeString += "0";
+        currTimeString += QVariant(elapsedS).toString() + ":";
+        if(elapsedMs < 10) currTimeString += "00";
+        if(elapsedMs < 100 && elapsedMs > 10) currTimeString += "0";
+        currTimeString += QVariant(elapsedMs).toString();
+        // end time formating
+    }
+    else
+        currTimeString = QTime::currentTime().toString("hh:mm:ss:zzz");
+
+    xlsx.write(lastColumn, 1, currTimeString); //time
+    xlsx.write(lastColumn, 2, values.temp_mos); //encoder
+    xlsx.write(lastColumn, 3, (values.rpm/12.0)); // rpm
+    xlsx.write(lastColumn, 4, values.current_motor); //Imotor
+    xlsx.write(lastColumn, 5, values.current_in);//Ibatt
+    xlsx.write(lastColumn, 6, values.temp_motor);//angleSet
 }
 
 void PageRtData::rotorPosReceived(double pos)
@@ -376,4 +427,42 @@ void PageRtData::on_tempShowMosfetBox_toggled(bool checked)
 void PageRtData::on_tempShowMotorBox_toggled(bool checked)
 {
     ui->tempPlot->graph(1)->setVisible(checked);
+}
+
+void PageRtData::on_startWriteXlsButton_clicked()
+{
+    ui->startWriteXlsButton->setEnabled(false);
+    ui->stopWriteXlsButton->setEnabled(true);
+
+    ui->xlsLog->clear();
+    ui->xlsLog->append("Start writing to XLS");
+    ui->xlsLog->append("Started at " + QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss"));
+
+    xlsx.setColumnWidth(1, 12);
+    xlsx.write("A1", "Время");
+    xlsx.write("B1", "Угол");
+    xlsx.write("C1", "Обороты");
+    xlsx.write("D1", "Iфаз");
+    xlsx.write("E1", "Iвх");
+    xlsx.write("F1", "Угол уст.");
+
+    lastColumn = 1;
+    xlsWriteStarted = true;
+    xlsWriteStartTime = 0;
+}
+
+void PageRtData::on_stopWriteXlsButton_clicked()
+{
+    ui->stopWriteXlsButton->setEnabled(false);
+    ui->startWriteXlsButton->setEnabled(true);
+
+    QDateTime currDateTime = QDateTime::currentDateTime();
+
+    ui->xlsLog->append("Stoped at " + currDateTime.toString("dd.MM.yyyy hh:mm:ss"));
+    ui->xlsLog->append("XLS file: " + QString("data_") + currDateTime.toString("dd.MM.yyyy_hh.mm.ss") + QString(".xlsx"));
+
+    xlsx.saveAs(QString("data_") + currDateTime.toString("dd.MM.yyyy_hh.mm.ss") + QString(".xlsx"));
+
+    lastColumn = 0;
+    xlsWriteStarted = false;
 }

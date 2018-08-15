@@ -123,8 +123,8 @@ void RtDataText::paintEvent(QPaintEvent *event)
                      Qt::AlignLeft, str);
 
     // Middle info box
-    str.sprintf("T FET   : %.2f \u00B0C\n"
-                "T Motor : %.2f \u00B0C\n"
+    str.sprintf("Angle   : %.2f \u00B0\n"
+                "Angl set: %.2f \u00B0\n"
                 "Fault   : %s\n"
                 "Tac     : %i\n"
                 "Tac ABS : %i\n",

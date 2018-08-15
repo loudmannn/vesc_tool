@@ -24,6 +24,7 @@
 #include <QVector>
 #include <QTimer>
 #include "vescinterface.h"
+#include "xlsxdocument.h"
 
 namespace Ui {
 class PageRtData;
@@ -43,6 +44,7 @@ public:
 private slots:
     void timerSlot();
     void valuesReceived(MC_VALUES values);
+    void valuesWriteXls(MC_VALUES values);
     void rotorPosReceived(double pos);
 
     void on_zoomHButton_toggled(bool checked);
@@ -57,11 +59,14 @@ private slots:
     void on_posStopButton_clicked();
     void on_tempShowMosfetBox_toggled(bool checked);
     void on_tempShowMotorBox_toggled(bool checked);
+    void on_startWriteXlsButton_clicked();
+    void on_stopWriteXlsButton_clicked();
 
 private:
     Ui::PageRtData *ui;
     VescInterface *mVesc;
     QTimer *mTimer;
+    QXlsx::Document xlsx;
 
     QVector<double> mTempMosVec;
     QVector<double> mTempMotorVec;
@@ -79,6 +84,11 @@ private:
 
     bool mUpdateValPlot;
     bool mUpdatePosPlot;
+
+    bool xlsWriteStarted;
+    qint64 xlsWriteStartTime;
+    int lastColumn;
+    int lastRow;
 
     void appendDoubleAndTrunc(QVector<double> *vec, double num, int maxSize);
     void updateZoom();
