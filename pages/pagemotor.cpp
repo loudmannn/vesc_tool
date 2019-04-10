@@ -62,6 +62,10 @@ void PageMotor::setVesc(VescInterface *vesc)
         ui->currentTab->addRowSeparator(tr("DRV8301"));
         ui->currentTab->addParamRow(mVesc->mcConfig(), "m_drv8301_oc_mode");
         ui->currentTab->addParamRow(mVesc->mcConfig(), "m_drv8301_oc_adj");
+        ui->currentTab->addRowSeparator(tr("Current protect"));
+        ui->currentTab->addParamRow(mVesc->mcConfig(), "l_current_protect_activate");
+        //ui->currentTab->addParamRow(mVesc->mcConfig(), "Current_threshold");
+        //ui->currentTab->addParamRow(mVesc->mcConfig(), "Current_protect_Coefficient");
 
         ui->voltageTab->addParamRow(mVesc->mcConfig(), "l_battery_cut_start");
         ui->voltageTab->addParamRow(mVesc->mcConfig(), "l_battery_cut_end");

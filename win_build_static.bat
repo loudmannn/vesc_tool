@@ -12,11 +12,6 @@ qmake -config release "CONFIG+=release_win build_free"
 mingw32-make clean
 mingw32-make -j2
 
-
-echo Сборка архива...
-cd build/win
-7z a -mx vesc_tool_windows.zip vesc_tool*.exe
-
 echo Сборка завершена
 echo Архив лежит по пути "build/win/vesc_tool_windows.zip"
 

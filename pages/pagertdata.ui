@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>834</width>
+    <width>841</width>
     <height>505</height>
    </rect>
   </property>
@@ -101,9 +101,40 @@
         <attribute name="title">
          <string>FOC</string>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
+        <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,0">
          <item>
           <widget class="QCustomPlot" name="focPlot" native="true"/>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,0">
+           <item>
+            <widget class="QPushButton" name="startXlsButton">
+             <property name="text">
+              <string>Начать запись</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="stopXlsButton">
+             <property name="text">
+              <string>Закончить запись</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>

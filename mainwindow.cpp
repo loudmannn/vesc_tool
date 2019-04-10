@@ -19,6 +19,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QTime>
 #include <QMessageBox>
 #include <QDebug>
 #include <QFileDialog>
@@ -31,6 +32,12 @@
 #include "widgets/helpdialog.h"
 #include "utility.h"
 #include "widgets/paramdialog.h"
+
+int msec = 0;
+float ampl = 0;
+float period = 0;
+float xp = 0;
+QTime start = QTime::currentTime();
 
 namespace {
 void stepTowards(double &value, double goal, double step) {
@@ -85,12 +92,15 @@ MainWindow::MainWindow(QWidget *parent) :
     mStatusInfoTime = 0;
     mStatusLabel = new QLabel(this);
     ui->statusBar->addPermanentWidget(mStatusLabel);
+    mSendDutyTimer = new QTimer(this);
     mTimer = new QTimer(this);
     mKeyLeft = false;
     mKeyRight = false;
     mMcConfRead = false;
     mAppConfRead = false;
 
+    connect(mSendDutyTimer, SIGNAL(timeout()),
+            this, SLOT(SendDuty()));
     connect(mTimer, SIGNAL(timeout()),
             this, SLOT(timerSlot()));
     connect(mVesc, SIGNAL(statusMessage(QString,bool)),
@@ -246,6 +256,16 @@ bool MainWindow::eventFilter(QObject *object, QEvent *e)
     }
 
     return false;
+}
+
+void MainWindow::SendDuty()
+{
+    float length = period/100;
+    xp = xp + 2.0 / length;
+
+    float Y = ampl * sin(3.14159265 * xp * 0.1);
+
+    mVesc->commands()->setDutyCycle(Y);
 }
 
 void MainWindow::timerSlot()
@@ -483,8 +503,13 @@ void MainWindow::serialPortNotWritable(const QString &port)
 
 void MainWindow::valuesReceived(MC_VALUES values)
 {
+//    msec = start.elapsed();
+
     ui->dispCurrent->setVal(values.current_motor);
     ui->dispDuty->setVal(values.duty_now * 100.0);
+//    ui->dispDuty->setVal(Y);
+
+//    start = QTime::currentTime();
 }
 
 void MainWindow::paramChangedDouble(QObject *src, QString name, double newParam)
@@ -536,7 +561,9 @@ void MainWindow::on_stopButton_clicked()
 {
     mVesc->commands()->setCurrent(0);
     ui->actionSendAlive->setChecked(false);
+    mSendDutyTimer->stop();
 }
+
 
 void MainWindow::on_fullBrakeButton_clicked()
 {
@@ -713,6 +740,17 @@ void MainWindow::on_speedButton_clicked()
 {
     mVesc->commands()->setRpm(ui->speedBox->value());
     ui->actionSendAlive->setChecked(true);
+}
+
+void MainWindow::on_startSinButton_clicked()
+{
+    ampl = (float)(ui->dutyBox->value());
+    period = (float)(ui->periodBox->value())* 1000.0;
+
+//    ampl = 0.7;
+//    period = 3 * 1000;
+
+    mSendDutyTimer->start(10);
 }
 
 void MainWindow::on_posButton_clicked()

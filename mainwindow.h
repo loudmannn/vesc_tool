@@ -23,6 +23,7 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QTimer>
+#include <QTime>
 #include <QProcess>
 #include <QSettings>
 #include "vescinterface.h"
@@ -57,6 +58,7 @@ public:
     bool eventFilter(QObject *object, QEvent *e);
 
 private slots:
+    void SendDuty();
     void timerSlot();
     void showStatusInfo(QString info, bool isGood);
     void showMessageDialog(const QString &title, const QString &msg, bool isGood, bool richText);
@@ -88,6 +90,7 @@ private slots:
     void on_dutyButton_clicked();
     void on_currentButton_clicked();
     void on_speedButton_clicked();
+    void on_startSinButton_clicked();
     void on_posButton_clicked();
     void on_brakeCurrentButton_clicked();
     void on_handbrakeButton_clicked();
@@ -114,6 +117,7 @@ private:
     QSettings mSettings;
     QString mVersion;
     VescInterface *mVesc;
+    QTimer *mSendDutyTimer;
     QTimer *mTimer;
     QLabel *mStatusLabel;
     int mStatusInfoTime;

@@ -57,7 +57,7 @@ PageRtData::PageRtData(QWidget *parent) :
 
     ui->currentPlot->addGraph(ui->currentPlot->xAxis, ui->currentPlot->yAxis2);
     ui->currentPlot->graph(graphIndex)->setPen(QPen(Qt::green));
-    ui->currentPlot->graph(graphIndex)->setName("Duty cycle");
+    ui->currentPlot->graph(graphIndex)->setName("Volts In");
     graphIndex++;
 
     // Temperatures
@@ -100,7 +100,7 @@ PageRtData::PageRtData(QWidget *parent) :
     ui->currentPlot->legend->setBrush(QBrush(QColor(255,255,255,230)));
     ui->currentPlot->xAxis->setLabel("Seconds (s)");
     ui->currentPlot->yAxis->setLabel("Ampere (A)");
-    ui->currentPlot->yAxis2->setLabel("Duty Cycle");
+    ui->currentPlot->yAxis2->setLabel("Volts in");
 
     ui->tempPlot->legend->setVisible(true);
     ui->tempPlot->legend->setFont(legendFont);
@@ -245,10 +245,20 @@ void PageRtData::valuesReceived(MC_VALUES values)
     appendDoubleAndTrunc(&mCurrMotorVec, values.current_motor, maxS);
     appendDoubleAndTrunc(&mIdVec, values.id, maxS);
     appendDoubleAndTrunc(&mIqVec, values.iq, maxS);
-    appendDoubleAndTrunc(&mDutyVec, values.duty_now, maxS);
+    appendDoubleAndTrunc(&mDutyVec, values.v_in, maxS);
     appendDoubleAndTrunc(&mRpmVec, values.rpm, maxS);
 
     qint64 tNow = QDateTime::currentMSecsSinceEpoch();
+
+
+
+    if(writeToFile)
+    {
+        xlsx.write(rowXls, 1, QString::number(timeXls.elapsed()));
+        xlsx.write(rowXls, 2, QString::number(values.id));
+        xlsx.write(rowXls, 3, QString::number(values.iq));
+        rowXls++;
+    }
 
     double elapsed = (double)(tNow - mLastUpdateTime) / 1000.0;
     if (elapsed > 1.0) {
@@ -376,4 +386,21 @@ void PageRtData::on_tempShowMosfetBox_toggled(bool checked)
 void PageRtData::on_tempShowMotorBox_toggled(bool checked)
 {
     ui->tempPlot->graph(1)->setVisible(checked);
+}
+
+void PageRtData::on_startXlsButton_clicked()
+{
+    timeXls.start();
+    writeToFile = true;
+
+    xlsx.write("A1", "Время");
+    xlsx.write("B1", "Выходной угол");
+    xlsx.write("C1", "Отставание");
+}
+
+void PageRtData::on_stopXlsButton_clicked()
+{
+    writeToFile = false;
+    xlsx.saveAs("FOC.xlsx");
+    rowXls = 2;
 }

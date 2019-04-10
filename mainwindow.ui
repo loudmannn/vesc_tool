@@ -14,7 +14,7 @@
    <string>VESC Tool</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="res_gold.qrc">
+   <iconset resource="res_neutral.qrc">
     <normaloff>:/res/icon.png</normaloff>:/res/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -44,7 +44,7 @@
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap resource="res_gold.qrc">:/res/logo.png</pixmap>
+           <pixmap resource="res_neutral.qrc">:/res/logo.png</pixmap>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -89,39 +89,7 @@
       <property name="spacing">
        <number>2</number>
       </property>
-      <item row="1" column="8">
-       <widget class="DisplayBar" name="dispCurrent" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>150</width>
-          <height>0</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="8">
-       <widget class="DisplayBar" name="dispDuty" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>150</width>
-          <height>0</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="6" rowspan="2">
+      <item row="0" column="8" rowspan="2">
        <widget class="QPushButton" name="fullBrakeButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
@@ -156,47 +124,94 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="4">
-       <widget class="QDoubleSpinBox" name="handbrakeBox">
-        <property name="font">
-         <font>
-          <family>Monospace</family>
-         </font>
+      <item row="0" column="9" rowspan="2">
+       <widget class="QPushButton" name="stopButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>Handbrake current</string>
-        </property>
-        <property name="prefix">
-         <string>HB </string>
-        </property>
-        <property name="suffix">
-         <string> A</string>
-        </property>
-        <property name="minimum">
-         <double>-500.000000000000000</double>
-        </property>
-        <property name="maximum">
-         <double>500.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.500000000000000</double>
-        </property>
-        <property name="value">
-         <double>3.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="5">
-       <widget class="QPushButton" name="handbrakeButton">
-        <property name="toolTip">
-         <string>Handbrake current</string>
+         <string>Switch off</string>
         </property>
         <property name="text">
          <string/>
         </property>
         <property name="icon">
          <iconset resource="res.qrc">
-          <normaloff>:/res/icons/Brake Warning-96.png</normaloff>:/res/icons/Brake Warning-96.png</iconset>
+          <normaloff>:/res/icons/Stop Sign-96.png</normaloff>:/res/icons/Stop Sign-96.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Esc</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QDoubleSpinBox" name="periodBox">
+        <property name="prefix">
+         <string>Sin p-d: </string>
+        </property>
+        <property name="suffix">
+         <string> sec</string>
+        </property>
+        <property name="decimals">
+         <number>1</number>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QDoubleSpinBox" name="posBox">
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string>Position</string>
+        </property>
+        <property name="prefix">
+         <string>P </string>
+        </property>
+        <property name="suffix">
+         <string> °</string>
+        </property>
+        <property name="maximum">
+         <double>360.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>10.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="10">
+       <widget class="DisplayBar" name="dispCurrent" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -233,36 +248,63 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
-       <widget class="QDoubleSpinBox" name="speedBox">
+      <item row="0" column="10">
+       <widget class="DisplayBar" name="dispDuty" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="6">
+       <widget class="QDoubleSpinBox" name="handbrakeBox">
         <property name="font">
          <font>
           <family>Monospace</family>
          </font>
         </property>
         <property name="toolTip">
-         <string>Speed</string>
+         <string>Handbrake current</string>
         </property>
         <property name="prefix">
-         <string>ω </string>
+         <string>HB </string>
         </property>
         <property name="suffix">
-         <string> RPM</string>
-        </property>
-        <property name="decimals">
-         <number>0</number>
+         <string> A</string>
         </property>
         <property name="minimum">
-         <double>-400000.000000000000000</double>
+         <double>-500.000000000000000</double>
         </property>
         <property name="maximum">
-         <double>400000.000000000000000</double>
+         <double>500.000000000000000</double>
         </property>
         <property name="singleStep">
-         <double>100.000000000000000</double>
+         <double>0.500000000000000</double>
         </property>
         <property name="value">
-         <double>5000.000000000000000</double>
+         <double>3.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="7">
+       <widget class="QPushButton" name="handbrakeButton">
+        <property name="toolTip">
+         <string>Handbrake current</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="res.qrc">
+          <normaloff>:/res/icons/Brake Warning-96.png</normaloff>:/res/icons/Brake Warning-96.png</iconset>
         </property>
        </widget>
       </item>
@@ -283,34 +325,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
-       <widget class="QDoubleSpinBox" name="posBox">
-        <property name="font">
-         <font>
-          <family>Monospace</family>
-         </font>
-        </property>
-        <property name="toolTip">
-         <string>Position</string>
-        </property>
-        <property name="prefix">
-         <string>P </string>
-        </property>
-        <property name="suffix">
-         <string> °</string>
-        </property>
-        <property name="maximum">
-         <double>360.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>10.000000000000000</double>
-        </property>
-        <property name="value">
-         <double>0.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
+      <item row="1" column="5">
        <widget class="QPushButton" name="posButton">
         <property name="toolTip">
          <string>Position</string>
@@ -324,46 +339,17 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="7" rowspan="2">
-       <widget class="QPushButton" name="stopButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
+      <item row="0" column="7">
+       <widget class="QPushButton" name="brakeCurrentButton">
         <property name="toolTip">
-         <string>Switch off</string>
+         <string>Brake current</string>
         </property>
         <property name="text">
          <string/>
         </property>
         <property name="icon">
          <iconset resource="res.qrc">
-          <normaloff>:/res/icons/Stop Sign-96.png</normaloff>:/res/icons/Stop Sign-96.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>40</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="shortcut">
-         <string>Esc</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QPushButton" name="speedButton">
-        <property name="toolTip">
-         <string>Speed</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="res.qrc">
-          <normaloff>:/res/icons/Circled Play-96.png</normaloff>:/res/icons/Circled Play-96.png</iconset>
+          <normaloff>:/res/icons/Brake Warning-96.png</normaloff>:/res/icons/Brake Warning-96.png</iconset>
         </property>
        </widget>
       </item>
@@ -381,7 +367,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="4">
+      <item row="0" column="6">
        <widget class="QDoubleSpinBox" name="brakeCurrentBox">
         <property name="font">
          <font>
@@ -408,20 +394,6 @@
         </property>
         <property name="value">
          <double>3.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="5">
-       <widget class="QPushButton" name="brakeCurrentButton">
-        <property name="toolTip">
-         <string>Brake current</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="res.qrc">
-          <normaloff>:/res/icons/Brake Warning-96.png</normaloff>:/res/icons/Brake Warning-96.png</iconset>
         </property>
        </widget>
       </item>
@@ -455,6 +427,64 @@
         </property>
         <property name="value">
          <double>0.200000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QDoubleSpinBox" name="speedBox">
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string>Speed</string>
+        </property>
+        <property name="prefix">
+         <string>ω </string>
+        </property>
+        <property name="suffix">
+         <string> RPM</string>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>-400000.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>400000.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>100.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>5000.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="speedButton">
+        <property name="toolTip">
+         <string>Speed</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="res.qrc">
+          <normaloff>:/res/icons/Circled Play-96.png</normaloff>:/res/icons/Circled Play-96.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="startSinButton">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="res.qrc">
+          <normaloff>:/res/icons/Circled Play-96.png</normaloff>:/res/icons/Circled Play-96.png</iconset>
         </property>
        </widget>
       </item>
@@ -1044,7 +1074,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="res_gold.qrc"/>
+  <include location="res_neutral.qrc"/>
   <include location="res.qrc"/>
  </resources>
  <connections/>

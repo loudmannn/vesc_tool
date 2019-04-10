@@ -94,7 +94,7 @@ void Commands::processPacket(QByteArray data)
     COMM_PACKET_ID id = (COMM_PACKET_ID)vb.vbPopFrontUint8();
 
     switch (id) {
-    case COMM_FW_VERSION: {
+    case COMM_FW_VERSION_REMOTION: {
         mTimeoutFwVer = 0;
         int fw_major;
         int fw_minor;
@@ -283,7 +283,7 @@ void Commands::getFwVersion()
     mTimeoutFwVer = mTimeoutCount;
 
     VByteArray vb;
-    vb.vbAppendInt8(COMM_FW_VERSION);
+    vb.vbAppendInt8(COMM_FW_VERSION_REMOTION);
     emitData(vb);
 }
 
