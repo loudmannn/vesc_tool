@@ -617,7 +617,7 @@ void MainWindow::on_actionSaveMotorConfXml_triggered()
         path += ".xml";
     }
 
-    bool res = mVesc->mcConfig()->saveXml(path, "MCConfiguration");
+    bool res = mVesc->mcConfig()->saveXml(path, "MCConfig_params");
 
     if (res) {
         showStatusInfo("Saved motor configuration", true);
@@ -641,7 +641,7 @@ void MainWindow::on_actionLoadMotorConfXml_triggered()
         return;
     }
 
-    bool res = mVesc->mcConfig()->loadXml(path, "MCConfiguration");
+    bool res = mVesc->mcConfig()->loadXml(path, "MCConfig_params");
 
     if (res) {
         showStatusInfo("Loaded motor configuration", true);

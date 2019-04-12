@@ -405,6 +405,51 @@ p, li { white-space: pre-wrap; }
             <valInt>1</valInt>
         </l_current_protect_activate>
 
+<l_current_threshold>
+    <longName>Current threshold</longName>
+    <type>1</type>
+    <transmittable>1</transmittable>
+    <description>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Nominal motor current.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</description>
+    <cDefine>MCCONF_L_CURRENT_THRESHOLD</cDefine>
+    <editorDecimalsDouble>2</editorDecimalsDouble>
+    <editorScale>1</editorScale>
+    <editAsPercentage>0</editAsPercentage>
+    <maxDouble>50</maxDouble>
+    <minDouble>1</minDouble>
+    <showDisplay>0</showDisplay>
+    <stepDouble>1</stepDouble>
+    <valDouble>2</valDouble>
+    <vTxDoubleScale>1000</vTxDoubleScale>
+    <suffix> A</suffix>
+    <vTx>9</vTx>
+</l_current_threshold>
+
+<l_current_protect_coefficient>
+    <longName>Current protect coefficient</longName>
+    <type>2</type>
+    <transmittable>1</transmittable>
+    <description>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; ; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The higher the coefficient, the later the current protection is triggered.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</description>
+    <cDefine>MCCONF_L_CURRENT_PROTECT_COEFFICIENT</cDefine>
+    <editorScale>1</editorScale>
+    <editAsPercentage>0</editAsPercentage>
+    <maxInt>50000</maxInt>
+    <minInt>100</minInt>
+    <showDisplay>0</showDisplay>
+    <stepInt>100</stepInt>
+    <valInt>100</valInt>
+    <suffix></suffix>
+    <vTx>5</vTx>
+</l_current_protect_coefficient>
+
+
         <l_temp_fet_start>
             <longName>MOSFET Temp Cutoff Start</longName>
             <type>1</type>
@@ -2440,6 +2485,8 @@ p, li { white-space: pre-wrap; }
         <ser>l_battery_cut_end</ser>
         <ser>l_slow_abs_current</ser>
         <ser>l_current_protect_activate</ser>
+        <ser>l_current_threshold</ser>
+        <ser>l_current_protect_coefficient</ser>
         <ser>l_temp_fet_start</ser>
         <ser>l_temp_fet_end</ser>
         <ser>l_temp_motor_start</ser>
