@@ -46,7 +46,7 @@ public:
 private slots:
     void timerSlot();
     void valuesReceived(MC_VALUES values);
-    void rotorPosReceived(double pos);
+    void rotorPosReceived(double pos_in, double pos_out);
 
     void on_zoomHButton_toggled(bool checked);
     void on_zoomVButton_toggled(bool checked);
@@ -63,6 +63,13 @@ private slots:
     void on_startXlsButton_clicked();
     void on_stopXlsButton_clicked();
 
+    void on_encoderInShow_toggled(bool checked);
+
+    void on_encoderOutShow_toggled(bool checked);
+
+    void on_encoderPIDNowShow_toggled(bool checked);
+
+    void on_encoderPIDSetShow_toggled(bool checked);
 
 private:
     Ui::PageRtData *ui;
@@ -83,6 +90,9 @@ private:
     QVector<double> mDutyVec;
     QVector<double> mRpmVec;
     QVector<double> mPositionVec;
+    QVector<double> mPositionVecOut;
+    QVector<double> mPositionPID_Set;
+    QVector<double> mPositionPID_Pos;
     QVector<double> mSeconds;
 
     double mSecondCounter;

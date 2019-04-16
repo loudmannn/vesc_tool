@@ -61,7 +61,10 @@ typedef enum {
     FAULT_CODE_DRV,
     FAULT_CODE_ABS_OVER_CURRENT,
     FAULT_CODE_OVER_TEMP_FET,
-    FAULT_CODE_OVER_TEMP_MOTOR
+    FAULT_CODE_OVER_TEMP_MOTOR,
+    FAULT_CODE_CURRENT_CONTROL_RUNOUT, // срабатывание токовой защиты
+    FAULT_CODE_ENCODER, // показания энкодеров одинаковые на протяжении 50 циклов чтения
+    FAULT_CODE_REDUCTION_PID // ошибка редукции, сделанные обороты входного и выходного звена не соответствуют передаточному числу
 } mc_fault_code;
 
 typedef enum {
@@ -92,7 +95,14 @@ struct MC_VALUES {
     Q_PROPERTY(double watt_hours_charged MEMBER watt_hours_charged)
     Q_PROPERTY(int tachometer MEMBER tachometer)
     Q_PROPERTY(int tachometer_abs MEMBER tachometer_abs)
-    Q_PROPERTY(double position MEMBER position)
+    Q_PROPERTY(double pid_pos_now MEMBER pid_pos_now)
+
+    Q_PROPERTY(double pid_pos_set MEMBER pid_pos_set)
+    Q_PROPERTY(double encoder_out MEMBER encoder_out)
+    Q_PROPERTY(double encoder_in MEMBER encoder_in)
+    Q_PROPERTY(double runout_value MEMBER runout_value)
+    Q_PROPERTY(double step_sensor MEMBER step_sensor)
+
     Q_PROPERTY(mc_fault_code fault_code MEMBER fault_code)
     Q_PROPERTY(QString fault_str MEMBER fault_str)
 
@@ -112,7 +122,12 @@ public:
     double watt_hours_charged;
     int tachometer;
     int tachometer_abs;
-    double position;
+    double pid_pos_now;
+    double pid_pos_set;
+    double encoder_out;
+    double encoder_in;
+    double runout_value;
+    quint8 step_sensor;
     mc_fault_code fault_code;
     QString fault_str;
 };

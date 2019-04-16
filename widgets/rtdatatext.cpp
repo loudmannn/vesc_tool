@@ -46,6 +46,12 @@ RtDataText::RtDataText(QWidget *parent) : QWidget(parent)
     mValues.v_in = 0;
     mValues.watt_hours = 0;
     mValues.watt_hours_charged = 0;
+
+    mValues.encoder_in = 0;
+    mValues.encoder_out = 0;
+    mValues.runout_value = 0;
+    mValues.step_sensor = 0;
+    mValues.pid_pos_set = 0;
 }
 
 void RtDataText::setValues(const MC_VALUES &values)
@@ -123,16 +129,16 @@ void RtDataText::paintEvent(QPaintEvent *event)
                      Qt::AlignLeft, str);
 
     // Middle info box
-    str.sprintf("T FET   : %.2f \u00B0C\n"
-                "T Motor : %.2f \u00B0C\n"
-                "Fault   : %s\n"
-                "Tac     : %i\n"
-                "Tac ABS : %i\n",
+    str.sprintf("T FET     : %.1f \u00B0C\n"
+                "T Motor   : %.1f \u00B0C\n"
+                "Step ADC  : %i\n"
+                "Runout Val: %.2f\n"
+                "Fault     : %s\n",
                 mValues.temp_mos,
                 mValues.temp_motor,
-                mValues.fault_str.toLocal8Bit().data(),
-                mValues.tachometer,
-                mValues.tachometer_abs);
+                mValues.step_sensor,
+                mValues.runout_value,
+                mValues.fault_str.toLocal8Bit().data());
 
     painter.setOpacity(0.7);
     painter.fillRect(vidw / 2.0 - bbox_w / 2.0, 0, bbox_w, bbow_h, Qt::black);
@@ -143,15 +149,15 @@ void RtDataText::paintEvent(QPaintEvent *event)
                      Qt::AlignLeft, str);
 
     // Right info box
-    str.sprintf("Ah Draw   : %.1f mAh\n"
-                "Ah Charge : %.1f mAh\n"
-                "Wh Draw   : %.2f Wh\n"
-                "Wh Charge : %.2f Wh\n"
-                "Volts In  : %.1f V",
-                mValues.amp_hours * 1000.0,
-                mValues.amp_hours_charged * 1000.0,
-                mValues.watt_hours,
-                mValues.watt_hours_charged,
+    str.sprintf("Encoder in : %.2f\u00B0\n"
+                "Encoder out: %.2f\u00B0\n"
+                "PID pos now: %.2f\u00B0\n"
+                "PID pos set: %.2f\u00B0\n"
+                "Volts In   : %.2f V",
+                mValues.encoder_in,
+                mValues.encoder_out,
+                mValues.pid_pos_now,
+                mValues.pid_pos_set,
                 mValues.v_in);
 
     painter.setOpacity(0.7);

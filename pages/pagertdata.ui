@@ -22,7 +22,7 @@
         <enum>QTabWidget::Triangular</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>4</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -146,19 +146,6 @@
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_8">
            <item>
-            <widget class="QProgressBar" name="posBar">
-             <property name="maximum">
-              <number>359</number>
-             </property>
-             <property name="value">
-              <number>120</number>
-             </property>
-             <property name="format">
-              <string>%v Degrees</string>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="QCustomPlot" name="posPlot" native="true">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
@@ -168,92 +155,74 @@
              </property>
             </widget>
            </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_7">
            <item>
-            <widget class="QPushButton" name="posInductanceButton">
-             <property name="toolTip">
-              <string>Start inductance based signal injection detection (BLDC only)</string>
-             </property>
-             <property name="text">
-              <string>Inductance</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="posEncoderButton">
-             <property name="toolTip">
-              <string>Plot the encoder position</string>
-             </property>
-             <property name="text">
-              <string>Encoder</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="posObserverButton">
-             <property name="toolTip">
-              <string>Plot the rotor position seen by the observer (FOC only)</string>
-             </property>
-             <property name="text">
-              <string>Observer</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="posPidButton">
-             <property name="toolTip">
-              <string>Plot the PID controller position</string>
-             </property>
-             <property name="text">
-              <string>PID Pos</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="posEncoderObserverErrorButton">
-             <property name="toolTip">
-              <string>Plot the difference between the observer and encoder position (FOC only)</string>
-             </property>
-             <property name="text">
-              <string>Observer Error</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="posPidErrorButton">
-             <property name="toolTip">
-              <string>Plot the PID controller position error</string>
-             </property>
-             <property name="text">
-              <string>PID Error</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="posStopButton">
-             <property name="toolTip">
-              <string>Stop sending position samples</string>
-             </property>
-             <property name="text">
-              <string>Stop</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>0</height>
-              </size>
-             </property>
-            </spacer>
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <item>
+              <widget class="QCheckBox" name="encoderInShow">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string>Encoder in</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="encoderOutShow">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string>Encoder Out</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="encoderPIDNowShow">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string>PID pos mow</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="encoderPIDSetShow">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string>PID pos set</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
            </item>
           </layout>
          </item>

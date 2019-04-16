@@ -135,7 +135,20 @@ PageRtData::PageRtData(QWidget *parent) :
 
     ui->posPlot->addGraph();
     ui->posPlot->graph(0)->setPen(QPen(Qt::blue));
-    ui->posPlot->graph(0)->setName("Position");
+    ui->posPlot->graph(0)->setName("Encoder in");
+
+    ui->posPlot->addGraph();
+    ui->posPlot->graph(1)->setPen(QPen(Qt::red));
+    ui->posPlot->graph(1)->setName("Encoder out");
+
+    ui->posPlot->addGraph();
+    ui->posPlot->graph(2)->setPen(QPen(Qt::green));
+    ui->posPlot->graph(2)->setName("PID position now");
+
+    ui->posPlot->addGraph();
+    ui->posPlot->graph(3)->setPen(QPen(Qt::magenta));
+    ui->posPlot->graph(3)->setName("PID position set");
+
     ui->posPlot->legend->setVisible(true);
     ui->posPlot->legend->setFont(legendFont);
     ui->posPlot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignRight|Qt::AlignBottom);
@@ -164,8 +177,8 @@ void PageRtData::setVesc(VescInterface *vesc)
     if (mVesc) {
         connect(mVesc->commands(), SIGNAL(valuesReceived(MC_VALUES)),
                 this, SLOT(valuesReceived(MC_VALUES)));
-        connect(mVesc->commands(), SIGNAL(rotorPosReceived(double)),
-                this, SLOT(rotorPosReceived(double)));
+        connect(mVesc->commands(), SIGNAL(rotorPosReceived(double, double)),
+                this, SLOT(rotorPosReceived(double, double)));
     }
 }
 
@@ -199,22 +212,39 @@ void PageRtData::timerSlot()
         ui->focPlot->graph(graphIndex++)->setData(xAxis, mIdVec);
         ui->focPlot->graph(graphIndex++)->setData(xAxis, mIqVec);
 
+        //Pos plot
+        /*QVector<double> xAxis(mPositionVec.size());
+        for (int i = 0;i < mPositionVec.size();i++) {
+            xAxis[i] = (double)i;
+        }*/
+
+        //ui->posBar->setValue((int)fabs(mPositionVec.last()));
+        //if()
+        ui->posPlot->graph(0)->setData(xAxis, mPositionVec);
+        ui->posPlot->graph(1)->setData(xAxis, mPositionVecOut);
+        ui->posPlot->graph(2)->setData(xAxis, mPositionPID_Pos);
+        ui->posPlot->graph(3)->setData(xAxis, mPositionPID_Set);
+
+
+
         if (ui->autoscaleButton->isChecked()) {
             ui->currentPlot->rescaleAxes();
             ui->tempPlot->rescaleAxes();
             ui->rpmPlot->rescaleAxes();
             ui->focPlot->rescaleAxes();
+            ui->posPlot->rescaleAxes();
         }
 
         ui->currentPlot->replot();
         ui->tempPlot->replot();
         ui->rpmPlot->replot();
         ui->focPlot->replot();
+        ui->posPlot->replot();
 
         mUpdateValPlot = false;
     }
 
-    if (mUpdatePosPlot) {
+    /*if (mUpdatePosPlot) {
         QVector<double> xAxis(mPositionVec.size());
         for (int i = 0;i < mPositionVec.size();i++) {
             xAxis[i] = (double)i;
@@ -222,6 +252,7 @@ void PageRtData::timerSlot()
 
         ui->posBar->setValue((int)fabs(mPositionVec.last()));
         ui->posPlot->graph(0)->setData(xAxis, mPositionVec);
+        ui->posPlot->graph(1)->setData(xAxis, mPositionVecOut);
 
         if (ui->autoscaleButton->isChecked()) {
             ui->posPlot->rescaleAxes();
@@ -230,15 +261,15 @@ void PageRtData::timerSlot()
         ui->posPlot->replot();
 
         mUpdatePosPlot = false;
-    }
+    }*/
 }
 
 void PageRtData::valuesReceived(MC_VALUES values)
 {
     ui->rtText->setValues(values);
 
-    const int maxS = 500;
-
+    const int maxS = 1000;
+      //СКОРЕЕ ВСЕГО ГРАФИКИ
     appendDoubleAndTrunc(&mTempMosVec, values.temp_mos, maxS);
     appendDoubleAndTrunc(&mTempMotorVec, values.temp_motor, maxS);
     appendDoubleAndTrunc(&mCurrInVec, values.current_in, maxS);
@@ -247,6 +278,10 @@ void PageRtData::valuesReceived(MC_VALUES values)
     appendDoubleAndTrunc(&mIqVec, values.iq, maxS);
     appendDoubleAndTrunc(&mDutyVec, values.v_in, maxS);
     appendDoubleAndTrunc(&mRpmVec, values.rpm, maxS);
+    appendDoubleAndTrunc(&mPositionVec, values.encoder_in, maxS);
+    appendDoubleAndTrunc(&mPositionVecOut, values.encoder_out, maxS);
+    appendDoubleAndTrunc(&mPositionPID_Pos, values.pid_pos_now, maxS);
+    appendDoubleAndTrunc(&mPositionPID_Set, values.pid_pos_set, maxS);
 
     qint64 tNow = QDateTime::currentMSecsSinceEpoch();
 
@@ -274,10 +309,11 @@ void PageRtData::valuesReceived(MC_VALUES values)
     mUpdateValPlot = true;
 }
 
-void PageRtData::rotorPosReceived(double pos)
+void PageRtData::rotorPosReceived(double pos_in, double pos_out)
 {
-    appendDoubleAndTrunc(&mPositionVec, pos, 1500);
-    mUpdatePosPlot = true;
+    //appendDoubleAndTrunc(&mPositionVec, pos_in, 1500);
+    //appendDoubleAndTrunc(&mPositionVecOut, pos_out, 1500);
+    //mUpdatePosPlot = true;
 }
 
 void PageRtData::appendDoubleAndTrunc(QVector<double> *vec, double num, int maxSize)
@@ -403,4 +439,24 @@ void PageRtData::on_stopXlsButton_clicked()
     writeToFile = false;
     xlsx.saveAs("FOC.xlsx");
     rowXls = 2;
+}
+
+void PageRtData::on_encoderInShow_toggled(bool checked)
+{
+    ui->posPlot->graph(0)->setVisible(checked);
+}
+
+void PageRtData::on_encoderOutShow_toggled(bool checked)
+{
+    ui->posPlot->graph(1)->setVisible(checked);
+}
+
+void PageRtData::on_encoderPIDNowShow_toggled(bool checked)
+{
+    ui->posPlot->graph(2)->setVisible(checked);
+}
+
+void PageRtData::on_encoderPIDSetShow_toggled(bool checked)
+{
+    ui->posPlot->graph(3)->setVisible(checked);
 }

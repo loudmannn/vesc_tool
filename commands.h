@@ -55,7 +55,7 @@ signals:
     void valuesReceived(MC_VALUES values);
     void printReceived(QString str);
     void samplesReceived(QByteArray bytes);
-    void rotorPosReceived(double pos);
+    void rotorPosReceived(double pos_in, double pos_out);
     void experimentSamplesReceived(QVector<double> samples);
     void bldcDetectReceived(bldc_detect param);
     void decodedPpmReceived(double value, double last_len);

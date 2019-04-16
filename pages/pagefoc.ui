@@ -20,7 +20,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -44,7 +44,11 @@
         <widget class="ParamTable" name="encoderTab"/>
        </item>
        <item>
-        <widget class="DetectFocEncoder" name="detectFocEncoder" native="true"/>
+        <widget class="DetectFocEncoder" name="detectFocEncoder" native="true">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

@@ -129,24 +129,21 @@ void Commands::processPacket(QByteArray data)
         values.temp_motor = vb.vbPopFrontDouble16(1e1);
         values.current_motor = vb.vbPopFrontDouble32(1e2);
         values.current_in = vb.vbPopFrontDouble32(1e2);
-        values.id = vb.vbPopFrontDouble32(1e2);
-        values.iq = vb.vbPopFrontDouble32(1e2);
+        values.encoder_in = (double)vb.vbPopFrontInt32() / 16384.0 * 360.0;
+        values.encoder_out = (double)vb.vbPopFrontInt32() / 16384.0 * 360.0;
         values.duty_now = vb.vbPopFrontDouble16(1e3);
         values.rpm = vb.vbPopFrontDouble32(1e0);
-        values.v_in = vb.vbPopFrontDouble16(1e1);
-        values.amp_hours = vb.vbPopFrontDouble32(1e4);
-        values.amp_hours_charged = vb.vbPopFrontDouble32(1e4);
-        values.watt_hours = vb.vbPopFrontDouble32(1e4);
-        values.watt_hours_charged = vb.vbPopFrontDouble32(1e4);
-        values.tachometer = vb.vbPopFrontInt32();
-        values.tachometer_abs = vb.vbPopFrontInt32();
+        values.v_in = vb.vbPopFrontDouble16(1e2);
+        values.runout_value = vb.vbPopFrontDouble32(1e2);
+        values.step_sensor = vb.vbPopFrontUint8();
         values.fault_code = (mc_fault_code)vb.vbPopFrontInt8();
         values.fault_str = faultToStr(values.fault_code);
+        values.pid_pos_set = vb.vbPopFrontDouble32(1e6);
 
         if (vb.size() >= 4) {
-            values.position = vb.vbPopFrontDouble32(1e6);
+            values.pid_pos_now = vb.vbPopFrontDouble32(1e6);
         } else {
-            values.position = -1.0;
+            values.pid_pos_now = -1.0;
         }
 
         emit valuesReceived(values);
@@ -160,10 +157,12 @@ void Commands::processPacket(QByteArray data)
         emit samplesReceived(vb);
         break;
 
-    case COMM_ROTOR_POSITION:
-        emit rotorPosReceived(vb.vbPopFrontDouble32(1e5));
+    case COMM_ROTOR_POSITION:{
+        double in = vb.vbPopFrontDouble32(1e5);
+        double out = vb.vbPopFrontDouble32(1e5);
+        emit rotorPosReceived(in, out);
         break;
-
+        }
     case COMM_EXPERIMENT_SAMPLE: {
         QVector<double> samples;
         while (!vb.isEmpty()) {
@@ -742,6 +741,9 @@ QString Commands::faultToStr(mc_fault_code fault)
     case FAULT_CODE_ABS_OVER_CURRENT: return "FAULT_CODE_ABS_OVER_CURRENT";
     case FAULT_CODE_OVER_TEMP_FET: return "FAULT_CODE_OVER_TEMP_FET";
     case FAULT_CODE_OVER_TEMP_MOTOR: return "FAULT_CODE_OVER_TEMP_MOTOR";
+    case FAULT_CODE_ENCODER: return "FAULT_CODE_ENCODER";
+    case FAULT_CODE_CURRENT_CONTROL_RUNOUT: return "FAULT_CODE_CURRENT_CONTROL_RUNOUT";
+    case FAULT_CODE_REDUCTION_PID: return "FAULT_CODE_REDUCTION_PID";
     default: return "Unknown fault";
     }
 }
