@@ -40,7 +40,7 @@ PageRtData::PageRtData(QWidget *parent) :
     ui->currentPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
     ui->tempPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
     ui->rpmPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
-    ui->focPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+    //ui->focPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
     ui->posPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 
     // Current and duty
@@ -57,7 +57,7 @@ PageRtData::PageRtData(QWidget *parent) :
 
     ui->currentPlot->addGraph(ui->currentPlot->xAxis, ui->currentPlot->yAxis2);
     ui->currentPlot->graph(graphIndex)->setPen(QPen(Qt::green));
-    ui->currentPlot->graph(graphIndex)->setName("Volts In");
+    ui->currentPlot->graph(graphIndex)->setName("Duty");
     graphIndex++;
 
     // Temperatures
@@ -80,7 +80,7 @@ PageRtData::PageRtData(QWidget *parent) :
     graphIndex++;
 
     // FOC
-    graphIndex = 0;
+    /*graphIndex = 0;
     ui->focPlot->addGraph();
     ui->focPlot->graph(graphIndex)->setPen(QPen(Qt::blue));
     ui->focPlot->graph(graphIndex)->setName("D Current");
@@ -89,7 +89,7 @@ PageRtData::PageRtData(QWidget *parent) :
     ui->focPlot->addGraph();
     ui->focPlot->graph(graphIndex)->setPen(QPen(Qt::red));
     ui->focPlot->graph(graphIndex)->setName("Q Current");
-    graphIndex++;
+    graphIndex++;*/
 
     QFont legendFont = font();
     legendFont.setPointSize(9);
@@ -100,7 +100,7 @@ PageRtData::PageRtData(QWidget *parent) :
     ui->currentPlot->legend->setBrush(QBrush(QColor(255,255,255,230)));
     ui->currentPlot->xAxis->setLabel("Seconds (s)");
     ui->currentPlot->yAxis->setLabel("Ampere (A)");
-    ui->currentPlot->yAxis2->setLabel("Volts in");
+    ui->currentPlot->yAxis2->setLabel("Duty");
 
     ui->tempPlot->legend->setVisible(true);
     ui->tempPlot->legend->setFont(legendFont);
@@ -117,12 +117,12 @@ PageRtData::PageRtData(QWidget *parent) :
     ui->rpmPlot->xAxis->setLabel("Seconds (s)");
     ui->rpmPlot->yAxis->setLabel("ERPM");
 
-    ui->focPlot->legend->setVisible(true);
+    /*ui->focPlot->legend->setVisible(true);
     ui->focPlot->legend->setFont(legendFont);
     ui->focPlot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignRight|Qt::AlignBottom);
     ui->focPlot->legend->setBrush(QBrush(QColor(255,255,255,230)));
     ui->focPlot->xAxis->setLabel("Seconds (s)");
-    ui->focPlot->yAxis->setLabel("Current");
+    ui->focPlot->yAxis->setLabel("Current");*/
 
     ui->currentPlot->yAxis->setRange(-20, 130);
     ui->currentPlot->yAxis2->setRange(-0.2, 1.3);
@@ -131,7 +131,7 @@ PageRtData::PageRtData(QWidget *parent) :
     ui->tempPlot->yAxis2->setRange(0, 120);
     ui->tempPlot->yAxis2->setVisible(true);
     ui->rpmPlot->yAxis->setRange(0, 120);
-    ui->focPlot->yAxis->setRange(0, 120);
+    //ui->focPlot->yAxis->setRange(0, 120);
 
     ui->posPlot->addGraph();
     ui->posPlot->graph(0)->setPen(QPen(Qt::blue));
@@ -209,9 +209,9 @@ void PageRtData::timerSlot()
         ui->rpmPlot->graph(graphIndex++)->setData(xAxis, mRpmVec);
 
         // FOC plot
-        graphIndex = 0;
+        /*graphIndex = 0;
         ui->focPlot->graph(graphIndex++)->setData(xAxis, mIdVec);
-        ui->focPlot->graph(graphIndex++)->setData(xAxis, mIqVec);
+        ui->focPlot->graph(graphIndex++)->setData(xAxis, mIqVec);*/
 
         //Pos plot
         /*QVector<double> xAxis(mPositionVec.size());
@@ -232,14 +232,14 @@ void PageRtData::timerSlot()
             ui->currentPlot->rescaleAxes();
             ui->tempPlot->rescaleAxes();
             ui->rpmPlot->rescaleAxes();
-            ui->focPlot->rescaleAxes();
+            //ui->focPlot->rescaleAxes();
             ui->posPlot->rescaleAxes();
         }
 
         ui->currentPlot->replot();
         ui->tempPlot->replot();
         ui->rpmPlot->replot();
-        ui->focPlot->replot();
+        //ui->focPlot->replot();
         ui->posPlot->replot();
 
         mUpdateValPlot = false;
@@ -275,9 +275,9 @@ void PageRtData::valuesReceived(MC_VALUES values)
     appendDoubleAndTrunc(&mTempMotorVec, values.temp_motor, maxS);
     appendDoubleAndTrunc(&mCurrInVec, values.current_in, maxS);
     appendDoubleAndTrunc(&mCurrMotorVec, values.current_motor, maxS);
-    appendDoubleAndTrunc(&mIdVec, values.id, maxS);
-    appendDoubleAndTrunc(&mIqVec, values.iq, maxS);
-    appendDoubleAndTrunc(&mDutyVec, values.v_in, maxS);
+    //appendDoubleAndTrunc(&mIdVec, values.id, maxS);
+    //appendDoubleAndTrunc(&mIqVec, values.iq, maxS);
+    appendDoubleAndTrunc(&mDutyVec, values.duty_now, maxS);
     appendDoubleAndTrunc(&mRpmVec, values.rpm, maxS);
     appendDoubleAndTrunc(&mPositionVec, values.encoder_in, maxS);
     appendDoubleAndTrunc(&mPositionVecOut, values.encoder_out, maxS);
@@ -335,7 +335,7 @@ void PageRtData::updateZoom()
     ui->currentPlot->axisRect()->setRangeZoom(plotOrientations);
     ui->tempPlot->axisRect()->setRangeZoom(plotOrientations);
     ui->rpmPlot->axisRect()->setRangeZoom(plotOrientations);
-    ui->focPlot->axisRect()->setRangeZoom(plotOrientations);
+    //ui->focPlot->axisRect()->setRangeZoom(plotOrientations);
     ui->posPlot->axisRect()->setRangeZoom(plotOrientations);
 }
 
@@ -356,13 +356,13 @@ void PageRtData::on_rescaleButton_clicked()
     ui->currentPlot->rescaleAxes();
     ui->tempPlot->rescaleAxes();
     ui->rpmPlot->rescaleAxes();
-    ui->focPlot->rescaleAxes();
+    //ui->focPlot->rescaleAxes();
     ui->posPlot->rescaleAxes();
 
     ui->currentPlot->replot();
     ui->tempPlot->replot();
     ui->rpmPlot->replot();
-    ui->focPlot->replot();
+    //ui->focPlot->replot();
     ui->posPlot->replot();
 }
 
@@ -437,9 +437,9 @@ void PageRtData::on_startXlsButton_clicked()
 
 void PageRtData::on_stopXlsButton_clicked()
 {
-    writeToFile = false;
+    /*writeToFile = false;
     xlsx.saveAs("FOC.xlsx");
-    rowXls = 2;
+    rowXls = 2;*/
 }
 
 void PageRtData::on_encoderInShow_toggled(bool checked)

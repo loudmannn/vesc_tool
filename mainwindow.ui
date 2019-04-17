@@ -89,7 +89,7 @@
       <property name="spacing">
        <number>2</number>
       </property>
-      <item row="0" column="8" rowspan="2">
+      <item row="0" column="6" rowspan="2">
        <widget class="QPushButton" name="fullBrakeButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
@@ -124,7 +124,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="9" rowspan="2">
+      <item row="0" column="7" rowspan="2">
        <widget class="QPushButton" name="stopButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
@@ -153,53 +153,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
-       <widget class="QDoubleSpinBox" name="periodBox">
-        <property name="prefix">
-         <string>Sin p-d: </string>
-        </property>
-        <property name="suffix">
-         <string> sec</string>
-        </property>
-        <property name="decimals">
-         <number>1</number>
-        </property>
-        <property name="singleStep">
-         <double>0.100000000000000</double>
-        </property>
-        <property name="value">
-         <double>1.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="4">
-       <widget class="QDoubleSpinBox" name="posBox">
-        <property name="font">
-         <font>
-          <family>Monospace</family>
-         </font>
-        </property>
-        <property name="toolTip">
-         <string>Position</string>
-        </property>
-        <property name="prefix">
-         <string>P </string>
-        </property>
-        <property name="suffix">
-         <string> °</string>
-        </property>
-        <property name="maximum">
-         <double>360.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>10.000000000000000</double>
-        </property>
-        <property name="value">
-         <double>0.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="10">
+      <item row="1" column="8">
        <widget class="DisplayBar" name="dispCurrent" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
@@ -215,40 +169,29 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QDoubleSpinBox" name="currentBox">
-        <property name="font">
-         <font>
-          <family>Monospace</family>
-         </font>
-        </property>
-        <property name="toolTip">
-         <string>Current</string>
-        </property>
-        <property name="frame">
-         <bool>true</bool>
-        </property>
+      <item row="0" column="2">
+       <widget class="QDoubleSpinBox" name="periodBox">
         <property name="prefix">
-         <string>I </string>
+         <string>Sin pos PID: </string>
         </property>
         <property name="suffix">
-         <string> A</string>
+         <string> sec</string>
+        </property>
+        <property name="decimals">
+         <number>1</number>
         </property>
         <property name="minimum">
-         <double>-500.000000000000000</double>
-        </property>
-        <property name="maximum">
-         <double>500.000000000000000</double>
+         <double>0.000000000000000</double>
         </property>
         <property name="singleStep">
-         <double>0.500000000000000</double>
+         <double>1.000000000000000</double>
         </property>
         <property name="value">
-         <double>3.000000000000000</double>
+         <double>5.000000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="0" column="10">
+      <item row="0" column="8">
        <widget class="DisplayBar" name="dispDuty" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
@@ -261,50 +204,6 @@
           <width>120</width>
           <height>0</height>
          </size>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="6">
-       <widget class="QDoubleSpinBox" name="handbrakeBox">
-        <property name="font">
-         <font>
-          <family>Monospace</family>
-         </font>
-        </property>
-        <property name="toolTip">
-         <string>Handbrake current</string>
-        </property>
-        <property name="prefix">
-         <string>HB </string>
-        </property>
-        <property name="suffix">
-         <string> A</string>
-        </property>
-        <property name="minimum">
-         <double>-500.000000000000000</double>
-        </property>
-        <property name="maximum">
-         <double>500.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.500000000000000</double>
-        </property>
-        <property name="value">
-         <double>3.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="7">
-       <widget class="QPushButton" name="handbrakeButton">
-        <property name="toolTip">
-         <string>Handbrake current</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="res.qrc">
-          <normaloff>:/res/icons/Brake Warning-96.png</normaloff>:/res/icons/Brake Warning-96.png</iconset>
         </property>
        </widget>
       </item>
@@ -322,78 +221,6 @@
         </property>
         <property name="flat">
          <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="5">
-       <widget class="QPushButton" name="posButton">
-        <property name="toolTip">
-         <string>Position</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="res.qrc">
-          <normaloff>:/res/icons/Circled Play-96.png</normaloff>:/res/icons/Circled Play-96.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="7">
-       <widget class="QPushButton" name="brakeCurrentButton">
-        <property name="toolTip">
-         <string>Brake current</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="res.qrc">
-          <normaloff>:/res/icons/Brake Warning-96.png</normaloff>:/res/icons/Brake Warning-96.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="currentButton">
-        <property name="toolTip">
-         <string>Current</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="res.qrc">
-          <normaloff>:/res/icons/Circled Play-96.png</normaloff>:/res/icons/Circled Play-96.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="6">
-       <widget class="QDoubleSpinBox" name="brakeCurrentBox">
-        <property name="font">
-         <font>
-          <family>Monospace</family>
-         </font>
-        </property>
-        <property name="toolTip">
-         <string>Brake current</string>
-        </property>
-        <property name="prefix">
-         <string>IB </string>
-        </property>
-        <property name="suffix">
-         <string> A</string>
-        </property>
-        <property name="minimum">
-         <double>-500.000000000000000</double>
-        </property>
-        <property name="maximum">
-         <double>500.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.500000000000000</double>
-        </property>
-        <property name="value">
-         <double>3.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -430,7 +257,18 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
+      <item row="0" column="3">
+       <widget class="QPushButton" name="startSinButton">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="res.qrc">
+          <normaloff>:/res/icons/Circled Play-96.png</normaloff>:/res/icons/Circled Play-96.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
        <widget class="QDoubleSpinBox" name="speedBox">
         <property name="font">
          <font>
@@ -463,7 +301,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="3">
+      <item row="1" column="1">
        <widget class="QPushButton" name="speedButton">
         <property name="toolTip">
          <string>Speed</string>
@@ -477,8 +315,38 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="3">
-       <widget class="QPushButton" name="startSinButton">
+      <item row="1" column="2">
+       <widget class="QDoubleSpinBox" name="posBox">
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string>Position</string>
+        </property>
+        <property name="prefix">
+         <string>P </string>
+        </property>
+        <property name="suffix">
+         <string> °</string>
+        </property>
+        <property name="maximum">
+         <double>360.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>10.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="posButton">
+        <property name="toolTip">
+         <string>Position</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -1074,8 +942,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="res_neutral.qrc"/>
   <include location="res.qrc"/>
+  <include location="res_neutral.qrc"/>
  </resources>
  <connections/>
 </ui>

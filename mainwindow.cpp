@@ -35,7 +35,7 @@
 
 int msec = 0;
 float ampl = 0;
-float period = 0;
+int period = 0;
 float xp = 0;
 QTime start = QTime::currentTime();
 
@@ -201,7 +201,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *e)
             return true;
         }
 
-        switch(keyEvent->key()) {
+        /*switch(keyEvent->key()) {
         case Qt::Key_Up:
             if (isPress) {
                 mVesc->commands()->setCurrent(ui->currentBox->value());
@@ -250,7 +250,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *e)
 
         default:
             break;
-        }
+        }*/
 
         return true;
     }
@@ -260,12 +260,16 @@ bool MainWindow::eventFilter(QObject *object, QEvent *e)
 
 void MainWindow::SendDuty()
 {
-    float length = period/100;
-    xp = xp + 2.0 / length;
+    xp++;
+    //if(xp*10 > period) xp = 0;
+    double time = xp*5;
+    time = (float)((int)time % period)/(float)period;
+    double phase = 3.14159265*2*time;
 
-    float Y = ampl * sin(3.14159265 * xp * 0.1);
+    double pos = sin(phase)*50 + 100;
+    //float Y = ampl * sin(3.14159265 * xp * 0.1);
 
-    mVesc->commands()->setDutyCycle(Y);
+    mVesc->commands()->setPos(pos);
 }
 
 void MainWindow::timerSlot()
@@ -730,11 +734,11 @@ void MainWindow::on_dutyButton_clicked()
     ui->actionSendAlive->setChecked(true);
 }
 
-void MainWindow::on_currentButton_clicked()
+/*void MainWindow::on_currentButton_clicked()
 {
     mVesc->commands()->setCurrent(ui->currentBox->value());
     ui->actionSendAlive->setChecked(true);
-}
+}*/
 
 void MainWindow::on_speedButton_clicked()
 {
@@ -744,13 +748,14 @@ void MainWindow::on_speedButton_clicked()
 
 void MainWindow::on_startSinButton_clicked()
 {
+    xp = 0;
     ampl = (float)(ui->dutyBox->value());
     period = (float)(ui->periodBox->value())* 1000.0;
 
 //    ampl = 0.7;
 //    period = 3 * 1000;
 
-    mSendDutyTimer->start(10);
+    mSendDutyTimer->start(5);
 }
 
 void MainWindow::on_posButton_clicked()
@@ -759,17 +764,17 @@ void MainWindow::on_posButton_clicked()
     ui->actionSendAlive->setChecked(true);
 }
 
-void MainWindow::on_brakeCurrentButton_clicked()
+/*void MainWindow::on_brakeCurrentButton_clicked()
 {
     mVesc->commands()->setCurrentBrake(ui->brakeCurrentBox->value());
     ui->actionSendAlive->setChecked(true);
-}
+}*/
 
-void MainWindow::on_handbrakeButton_clicked()
+/*void MainWindow::on_handbrakeButton_clicked()
 {
     mVesc->commands()->setHandbrake(ui->handbrakeBox->value());
     ui->actionSendAlive->setChecked(true);
-}
+}*/
 
 void MainWindow::addPageItem(QString name, QString icon, QString groupIcon, bool bold, bool indented)
 {

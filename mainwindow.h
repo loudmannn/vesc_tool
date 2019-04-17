@@ -88,12 +88,12 @@ private slots:
     void on_actionAbout_triggered();
     void on_actionLibrariesUsed_triggered();
     void on_dutyButton_clicked();
-    void on_currentButton_clicked();
+    //void on_currentButton_clicked();
     void on_speedButton_clicked();
     void on_startSinButton_clicked();
     void on_posButton_clicked();
-    void on_brakeCurrentButton_clicked();
-    void on_handbrakeButton_clicked();
+    //void on_brakeCurrentButton_clicked();
+    //void on_handbrakeButton_clicked();
     void on_pageList_currentRowChanged(int currentRow);
     void on_actionParameterEditorMcconf_triggered();
     void on_actionParameterEditorAppconf_triggered();

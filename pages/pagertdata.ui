@@ -22,7 +22,7 @@
         <enum>QTabWidget::Triangular</enum>
        </property>
        <property name="currentIndex">
-        <number>4</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -94,47 +94,6 @@
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
           <widget class="QCustomPlot" name="rpmPlot" native="true"/>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="tab_4">
-        <attribute name="title">
-         <string>FOC</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,0">
-         <item>
-          <widget class="QCustomPlot" name="focPlot" native="true"/>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,0">
-           <item>
-            <widget class="QPushButton" name="startXlsButton">
-             <property name="text">
-              <string>Начать запись</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="stopXlsButton">
-             <property name="text">
-              <string>Закончить запись</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
          </item>
         </layout>
        </widget>
