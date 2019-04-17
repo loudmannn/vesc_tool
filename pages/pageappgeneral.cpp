@@ -44,7 +44,7 @@ void PageAppGeneral::setVesc(VescInterface *vesc)
     mVesc = vesc;
 
     if (mVesc) {
-        ui->appTab->addParamRow(mVesc->appConfig(), "app_to_use");
+        //ui->appTab->addParamRow(mVesc->appConfig(), "app_to_use");
         ui->appTab->addParamRow(mVesc->appConfig(), "controller_id");
         ui->appTab->addParamRow(mVesc->appConfig(), "timeout_msec");
         ui->appTab->addParamRow(mVesc->appConfig(), "timeout_brake_current");

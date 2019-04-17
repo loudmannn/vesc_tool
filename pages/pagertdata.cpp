@@ -149,6 +149,7 @@ PageRtData::PageRtData(QWidget *parent) :
     ui->posPlot->graph(3)->setPen(QPen(Qt::magenta));
     ui->posPlot->graph(3)->setName("PID position set");
 
+
     ui->posPlot->legend->setVisible(true);
     ui->posPlot->legend->setFont(legendFont);
     ui->posPlot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignRight|Qt::AlignBottom);
