@@ -14,7 +14,7 @@
    <string>VESC Tool</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="res_neutral.qrc">
+   <iconset resource="res_gold.qrc">
     <normaloff>:/res/icon.png</normaloff>:/res/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -44,7 +44,7 @@
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap resource="res_neutral.qrc">:/res/logo.png</pixmap>
+           <pixmap resource="res_gold.qrc">:/res/logo.png</pixmap>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -566,6 +566,9 @@
    <property name="toolTip">
     <string>Forward communication over CAN-bus</string>
    </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
   </action>
   <action name="actionReconnect">
    <property name="icon">
@@ -593,6 +596,9 @@
    </property>
    <property name="toolTip">
     <string>Stream realtime data</string>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionReadAppconf">
@@ -682,6 +688,9 @@
    <property name="toolTip">
     <string>Use arrow keys to control motor</string>
    </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
   </action>
   <action name="actionParameterEditorMcconf">
    <property name="icon">
@@ -752,6 +761,9 @@
    <property name="toolTip">
     <string>Stream realtime app data</string>
    </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
   </action>
   <action name="actionTerminalPrintFaults">
    <property name="icon">
@@ -809,6 +821,9 @@
    </property>
    <property name="toolTip">
     <string>Send alive packets periodically to prevent timeout</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
   <action name="actionLibrariesUsed">
@@ -942,8 +957,8 @@
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="res_gold.qrc"/>
   <include location="res.qrc"/>
-  <include location="res_neutral.qrc"/>
  </resources>
  <connections/>
 </ui>

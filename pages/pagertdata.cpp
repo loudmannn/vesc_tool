@@ -270,7 +270,6 @@ void PageRtData::valuesReceived(MC_VALUES values)
     ui->rtText->setValues(values);
 
     const int maxS = 1000;
-      //СКОРЕЕ ВСЕГО ГРАФИКИ
     appendDoubleAndTrunc(&mTempMosVec, values.temp_mos, maxS);
     appendDoubleAndTrunc(&mTempMotorVec, values.temp_motor, maxS);
     appendDoubleAndTrunc(&mCurrInVec, values.current_in, maxS);

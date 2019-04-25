@@ -852,14 +852,14 @@ void MainWindow::reloadPages()
         widget->deleteLater();
     }
 
-    mPageWelcome = new PageWelcome(this);
+    /*mPageWelcome = new PageWelcome(this);
     mPageWelcome->setVesc(mVesc);
     ui->pageWidget->addWidget(mPageWelcome);
     addPageItem(tr("Welcome & Wizards"), "://res/icons/Home-96.png", "", true);
     connect(ui->actionMotorSetupWizard, SIGNAL(triggered(bool)),
             mPageWelcome, SLOT(startSetupWizardMotor()));
     connect(ui->actionAppSetupWizard, SIGNAL(triggered(bool)),
-            mPageWelcome, SLOT(startSetupWizardApp()));
+            mPageWelcome, SLOT(startSetupWizardApp()));*/
 
     mPageConnection = new PageConnection(this);
     mPageConnection->setVesc(mVesc);
@@ -882,11 +882,11 @@ void MainWindow::reloadPages()
     addPageItem(tr("General"), "://res/icons/Horizontal Settings Mixer-96.png",
                 "://res/icons/mcconf.png", false, true);
 
-    mPageBldc = new PageBldc(this);
+    /*mPageBldc = new PageBldc(this);
     mPageBldc->setVesc(mVesc);
     ui->pageWidget->addWidget(mPageBldc);
     addPageItem(tr("BLDC"), "://res/icons/bldc.png",
-                "://res/icons/mcconf.png", false, true);
+                "://res/icons/mcconf.png", false, true);*/
 
     mPageFoc = new PageFoc(this);
     mPageFoc->setVesc(mVesc);
