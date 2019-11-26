@@ -73,7 +73,7 @@ void PageFoc::setVesc(VescInterface *vesc)
 //        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_6");
 //        ui->hallTab->addParamRow(mVesc->mcConfig(), "foc_hall_table_7");
 
-        //ui->encoderTab->addParamRow(mVesc->mcConfig(), "foc_sl_erpm");
+        ui->encoderTab->addParamRow(mVesc->mcConfig(), "foc_sl_erpm");
         ui->encoderTab->addParamRow(mVesc->mcConfig(), "foc_encoder_offset");
         ui->encoderTab->addParamRow(mVesc->mcConfig(), "foc_encoder_ratio");
         ui->encoderTab->addParamRow(mVesc->mcConfig(), "foc_encoder_inverted");
