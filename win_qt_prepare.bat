@@ -9,7 +9,7 @@ echo Скачивание Qt5...
 SET downloadUrl=http://mechsys.ru/Qt.7z
 SET zipFile=%~dp0tools\Qt-Static.7z
 
-set /A maxbytesize=1606852212
+set /A maxbytesize=835724206
 ::set /A maxbytesize=1606762350
 set /A minbytesize=0
 IF EXIST %zipFile% (
