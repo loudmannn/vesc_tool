@@ -287,13 +287,6 @@ void PageRtData::valuesReceived(MC_VALUES values)
 
 
 
-    if(writeToFile)
-    {
-        xlsx.write(rowXls, 1, QString::number(timeXls.elapsed()));
-        xlsx.write(rowXls, 2, QString::number(values.id));
-        xlsx.write(rowXls, 3, QString::number(values.iq));
-        rowXls++;
-    }
 
     double elapsed = (double)(tNow - mLastUpdateTime) / 1000.0;
     if (elapsed > 1.0) {
@@ -422,23 +415,6 @@ void PageRtData::on_tempShowMosfetBox_toggled(bool checked)
 void PageRtData::on_tempShowMotorBox_toggled(bool checked)
 {
     ui->tempPlot->graph(1)->setVisible(checked);
-}
-
-void PageRtData::on_startXlsButton_clicked()
-{
-    timeXls.start();
-    writeToFile = true;
-
-    xlsx.write("A1", "Время");
-    xlsx.write("B1", "Выходной угол");
-    xlsx.write("C1", "Отставание");
-}
-
-void PageRtData::on_stopXlsButton_clicked()
-{
-    /*writeToFile = false;
-    xlsx.saveAs("FOC.xlsx");
-    rowXls = 2;*/
 }
 
 void PageRtData::on_encoderInShow_toggled(bool checked)

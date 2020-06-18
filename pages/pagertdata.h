@@ -22,11 +22,9 @@
 
 //#define XLSX_NO_LIB;
 #include <QWidget>
-#include <QTime>
 #include <QVector>
 #include <QTimer>
 #include "vescinterface.h"
-#include "xlsxdocument.h"
 
 namespace Ui {
 class PageRtData;
@@ -60,8 +58,6 @@ private slots:
     void on_posStopButton_clicked();
     void on_tempShowMosfetBox_toggled(bool checked);
     void on_tempShowMotorBox_toggled(bool checked);
-    void on_startXlsButton_clicked();
-    void on_stopXlsButton_clicked();
 
     void on_encoderInShow_toggled(bool checked);
 
@@ -75,11 +71,6 @@ private:
     Ui::PageRtData *ui;
     VescInterface *mVesc;
     QTimer *mTimer;
-
-    QXlsx::Document xlsx;
-    long rowXls = 2;
-    QTime timeXls;
-    bool writeToFile = false;
 
     QVector<double> mTempMosVec;
     QVector<double> mTempMotorVec;

@@ -115,7 +115,6 @@ FORMS    += mainwindow.ui \
 include(pages/pages.pri)
 include(widgets/widgets.pri)
 include(mobile/mobile.pri)
-include(qtxlsx.pri)
 
 RESOURCES += res.qrc
 
